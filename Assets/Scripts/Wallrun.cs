@@ -14,6 +14,13 @@ public class Wallrun : MonoBehaviour {
     private bool m_WallRunning = false;
     private bool m_LeftPress = false;
     private bool m_RightPress = false;
+
+    public float wallrunHeight = 1.0f;
+    public float wallrunDistanceModifier = 10.0f;
+    private float wallrunSpeed;
+    private float wallRunDistance;
+    private float wallRunDistanceDone;
+    
     
     void Start () {
 		m_rb = GetComponent<Rigidbody>();
@@ -44,26 +51,38 @@ public class Wallrun : MonoBehaviour {
 
         if (m_RightPress)
         {
-            if(Physics.Raycast(transform.position, transform.right, out m_rcRight, 1) && m_rcRight.transform.tag == "Wall")
+            if(Physics.Raycast(transform.position, transform.right, out m_rcRight, 1) && m_rcRight.transform.tag == "Wall") //if player is toutching wall and pressing correct key
             {
-                setWallRunning();
+                //now we need to check if player has been wall running already
+                if (!m_WallRunning)
+                {
+                    //initialise wall run trajectory
+                    initWallRun();
+                    continueWallRun();
+                }
+                else
+                {
+                    //continue on trajectory
+                    continueWallRun();
+                }
             }
             else
             {
                 cancelWallRun();
             }
         }
+        /*
         else if (m_LeftPress)
         {
             if (Physics.Raycast(transform.position, -transform.right, out m_rcLeft, 1) && m_rcLeft.transform.tag == "Wall")
             {
-                setWallRunning();
+                
             }
             else
             {
                 cancelWallRun();
             }
-        }
+        }*/
         else
         {
             cancelWallRun();
@@ -73,16 +92,34 @@ public class Wallrun : MonoBehaviour {
 
     }
 
-    public void setWallRunning()
+    private void initWallRun()
     {
+         //here we save the value of the speed starting the wall run to be used later
+        wallrunSpeed = m_pc.GetForwardVelocity();
+        wallRunDistance = wallrunDistanceModifier * wallrunSpeed;
+        wallRunDistanceDone = 0;
         m_WallRunning = true;
-        transform.Translate(0, 1 * Time.deltaTime, 0);
         m_rb.useGravity = false;
     }
 
-    public void cancelWallRun()
+    private void continueWallRun()
+    {
+        wallRunDistanceDone += wallrunSpeed * Time.deltaTime;
+        float up = 1.5f * Mathf.Sin(2 * (wallRunDistanceDone/wallRunDistance));
+        Debug.Log(up);
+        transform.Translate(0, up * Time.deltaTime, 0);
+        /*else
+        {
+            
+        }
+        */
+    }
+
+    private void cancelWallRun()
     {
         m_WallRunning = false;
         m_rb.useGravity = true;
     }
+
+   
 }

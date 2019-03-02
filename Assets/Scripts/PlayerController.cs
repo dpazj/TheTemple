@@ -181,6 +181,10 @@ public class PlayerController : MonoBehaviour {
 
     }
 
+    public float GetForwardVelocity()
+    {
+        return this.m_ForwardVelocity;
+    }
 
     private void OnGUI()
     {
