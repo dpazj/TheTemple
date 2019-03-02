@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-    private float m_MaxSpeed = 8.0f;
-    private float m_WalkSpeed = 4.0f;
-    private float m_RunModifier = 0.1f;
-    private float m_WalkModifier = 0.1f;
+    public float m_MaxSpeed = 8.0f;
+    public float m_WalkSpeed = 4.0f;
+    public float m_RunModifier = 0.1f;
+    public float m_WalkModifier = 0.1f;
 
     private float m_ForwardVelocity;
     private float m_StraffeVelocity;
 
 
-    private float m_JumpForce = 70.0f;
+    public float m_JumpForce = 70.0f;
     private float m_JumpAirControl = 0.4f; 
 
     private bool m_Jump;
@@ -127,14 +127,11 @@ public class PlayerController : MonoBehaviour {
             }
             else if (!run && Mathf.Abs(forwardVelocity) > m_WalkSpeed)
             {
-
                 forwardVelocity = forwardVelocity - 0.25f;
                 if (forwardVelocity < m_WalkSpeed)
                 {
                     forwardVelocity = m_WalkSpeed;
                 }
-
-
             }
         }
         else
@@ -164,7 +161,6 @@ public class PlayerController : MonoBehaviour {
         if (forwardMultiplier == -1 && forwardVelocity > 0) { forwardVelocity = -0.5f; }
         if (forwardMultiplier == 1 && forwardVelocity < 0) { forwardVelocity = 0.5f; }
         
-
         m_ForwardVelocity = forwardVelocity;
         m_StraffeVelocity = straffeVelocity;
     }

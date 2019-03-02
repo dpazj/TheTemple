@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 23314942050132522}
   - component: {fileID: 114413778725272240}
   - component: {fileID: 54278482153182706}
+  - component: {fileID: 114173877360106656}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -176,6 +177,17 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1018917383836340}
   m_Enabled: 1
+--- !u!114 &114173877360106656
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1439808475045820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f806f9716bc5864e861fc8f763a95ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114413778725272240
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -187,6 +199,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69b7ed9a500ac184390693efe282a7c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_MaxSpeed: 8
+  m_WalkSpeed: 4
+  m_RunModifier: 0.1
+  m_WalkModifier: 0.1
+  m_JumpForce: 70
 --- !u!114 &114636936917444768
 MonoBehaviour:
   m_ObjectHideFlags: 1
