@@ -10,6 +10,8 @@ public class PlayerCamController : MonoBehaviour {
     public float sensitivity = 2.0f;
     public float smoothing = 2.0f;
 
+    private float rotation = 0f;
+
     GameObject character;
 
 	// Use this for initialization
@@ -29,5 +31,15 @@ public class PlayerCamController : MonoBehaviour {
 
         transform.localRotation = Quaternion.AngleAxis(-mouseLook.y, Vector3.right);
         character.transform.localRotation = Quaternion.AngleAxis(mouseLook.x, character.transform.up);
+
+
+        //rotate to desired angle 
+        transform.Rotate(0, 0, rotation);
     }
+
+    public void setCameraRotation(float rot)
+    {
+        this.rotation = rot;
+    }
+
 }

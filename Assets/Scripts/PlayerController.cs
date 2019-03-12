@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
+    //basic movement
     public float m_MaxSpeed = 8.0f;
     public float m_WalkSpeed = 4.0f;
     public float m_RunModifier = 0.1f;
@@ -22,22 +23,44 @@ public class PlayerController : MonoBehaviour {
     private bool m_IsGrounded;
     private bool m_Moving;
     
-
+    //Components 
     private Rigidbody m_RigidBody;
     private CapsuleCollider m_Capsule;
     private Camera m_Cam;
-    
+    private PlayerCamController m_PlayerCam;
+
+    //Wall jump stuff
+    private RaycastHit m_rcRight;
+    private RaycastHit m_rcLeft;
+
+
+    private bool m_WallRunning = false;
+    private bool m_LeftPress = false;
+    private bool m_RightPress = false;
+    private bool canWallRun = true;
+
+
+    private readonly float wallrunDistanceModifier = 3.0f;
+    private float wallRunHeight;
+
+    private float wallrunSpeed;
+    private float wallRunDistance;
+    private float wallRunDistanceDone;
+    private float cameraRotate = 0;
+
 
     //initialization
     private void Start () {
         m_RigidBody = GetComponent<Rigidbody>();
         m_Capsule = GetComponent<CapsuleCollider>();
         m_Cam = GetComponentInChildren<Camera>();
+        m_PlayerCam = GetComponentInChildren<PlayerCamController>(); 
         //prevents rigidbody falling over
         m_RigidBody.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX;
         Cursor.lockState = CursorLockMode.Locked;
         m_ForwardVelocity = 0;
         m_StraffeVelocity = 0;
+
 }
 	
 	private void Update ()
@@ -52,21 +75,43 @@ public class PlayerController : MonoBehaviour {
         {
             Cursor.lockState = CursorLockMode.None;
         }
+
+        if (Input.GetKey(KeyCode.Q))
+        {
+            m_LeftPress = true;
+            m_RightPress = false;
+        }
+        else if (Input.GetKey(KeyCode.E))
+        {
+            m_LeftPress = false;
+            m_RightPress = true;
+        }
+        else
+        {
+            m_LeftPress = m_RightPress = false;
+        }
     }
 
     private void FixedUpdate()
     {
-        
+        CheckGrounded();
+        Movement();
+        WallRun();
+    }
+
+    private void Movement()
+    {
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
 
         CheckGrounded();
-        GetSpeed(h,v);
+        GetSpeed(h, v);
 
-        if (v == 0){m_ForwardVelocity = 0;}
-        if (h == 0 ){m_StraffeVelocity = 0;}
+        if (v == 0) { m_ForwardVelocity = 0; }
+        if (h == 0) { m_StraffeVelocity = 0; }
 
-        if (!m_IsGrounded && m_Jumping) {
+        if (!m_IsGrounded && m_Jumping)
+        {
             h *= m_JumpAirControl;
             if (m_ForwardJump)
             {
@@ -77,7 +122,7 @@ public class PlayerController : MonoBehaviour {
                 v = -1;
             }
         }
-        
+
         h *= Time.deltaTime;
         v *= Time.deltaTime;
         transform.Translate(h * Mathf.Abs(m_StraffeVelocity), 0, v * Mathf.Abs(m_ForwardVelocity));
@@ -89,19 +134,135 @@ public class PlayerController : MonoBehaviour {
                 m_RigidBody.velocity = new Vector3(m_RigidBody.velocity.x, 0f, m_RigidBody.velocity.z);
                 m_RigidBody.AddForce(new Vector3(0f, m_JumpForce, 0f), ForceMode.Impulse);
                 m_Jumping = true;
-                if(m_ForwardVelocity > 1)
+                if (m_ForwardVelocity > 1)
                 {
                     m_ForwardJump = true;
-                }else if(m_ForwardVelocity < 1)
+                }
+                else if (m_ForwardVelocity < 1)
                 {
                     m_ForwardJump = false;
                 }
-                
+
             }
         }
 
         m_Jump = false;
+    }
 
+    private void WallRun()
+    {
+        if (!canWallRun) { Debug.Log("A"); return;}
+        
+        if (m_ForwardVelocity < (m_MaxSpeed * 0.75))
+        {
+            //player must be at least at 75% of max speed to wall run
+            return;
+        }
+
+
+        if (m_RightPress)
+        {
+            
+            if (Physics.Raycast(transform.position, transform.right, out m_rcRight, 1) && m_rcRight.transform.tag == "Wall") //if player is toutching wall and pressing correct key
+            {
+                //now we need to check if player has been wall running already
+                if (!m_WallRunning)
+                {
+                    //initialise wall run trajectory
+                    initWallRun();
+                    continueWallRun();
+                }
+                else
+                {
+                    //continue on trajectory
+                    continueWallRun();
+                }
+            }
+            else
+            {
+                cancelWallRun();
+            }
+        }
+        else if (m_LeftPress)
+        {
+            if (Physics.Raycast(transform.position, -transform.right, out m_rcLeft, 1) && m_rcLeft.transform.tag == "Wall") //if player is toutching wall and pressing correct key
+            {
+                //now we need to check if player has been wall running already
+                if (!m_WallRunning)
+                {
+                    //initialise wall run trajectory
+                    initWallRun();
+                    continueWallRun();
+                }
+                else
+                {
+                    //continue on trajectory
+                    continueWallRun();
+                }
+            }
+            else
+            {
+                cancelWallRun();
+            }
+        }
+        else
+        {
+            cancelWallRun();
+        }
+
+    }
+
+    private void initWallRun()
+    {
+
+        //here we save the value of the speed starting the wall run to be used later
+        wallrunSpeed = this.m_ForwardVelocity;
+        wallRunHeight = 2.75f * (wallrunSpeed / this.m_MaxSpeed);
+
+        wallRunDistance = wallrunDistanceModifier * wallrunSpeed;
+        wallRunDistanceDone = 0;
+        m_WallRunning = true;
+        m_RigidBody.useGravity = false;
+        m_RigidBody.velocity = Vector3.zero;
+        tiltCamera();
+    }
+
+    private void continueWallRun()
+    {
+        //runs along a sine curve
+        wallRunDistanceDone += wallrunSpeed * Time.deltaTime;
+        float up = (2.75f * Mathf.Sin(8f * (wallRunDistanceDone / wallRunDistance)));
+        transform.Translate(0, up * Time.deltaTime, 0);
+
+        if ((wallRunDistanceDone / wallRunDistance) >= 0.7) { cancelWallRun(); }
+    }
+
+
+    private void cancelWallRun()
+    {
+        canWallRun = m_WallRunning ?  false : true;
+        m_WallRunning = false;
+        m_RigidBody.useGravity = true;
+        
+        normalCameraTilt();
+    }
+
+    private void tiltCamera()
+    {
+        if (m_RightPress) //if wall running on the right tilt camera left
+        {
+            m_PlayerCam.setCameraRotation(10);
+        }
+        else //if wall running on the left tilt camera right
+        {
+            m_PlayerCam.setCameraRotation(-10);
+        }
+
+    }
+
+    private void normalCameraTilt()
+    {
+        m_PlayerCam.setCameraRotation(0);
     }
 
 
@@ -169,16 +330,22 @@ public class PlayerController : MonoBehaviour {
 
         //Modified from "RigidbodyFirstPersonController" GroundCheck() method
         RaycastHit hitInfo;
-        if (Physics.SphereCast(transform.position, m_Capsule.radius * (1.0f - 0.1f), Vector3.down, out hitInfo, ((m_Capsule.height / 2f) - m_Capsule.radius) + 0.1f, Physics.AllLayers, QueryTriggerInteraction.Ignore))
+        if (Physics.SphereCast(transform.position, m_Capsule.radius * (1.0f - 0.1f), Vector3.down, out hitInfo, ((m_Capsule.height / 2f) - m_Capsule.radius) + 0.1f, Physics.AllLayers, QueryTriggerInteraction.Ignore)) //Check if player is toutching ground
         {
             m_IsGrounded = true;
             m_Jumping = false;
+            canWallRun = true;
         }
         else
         {
             m_IsGrounded = false;
         }
 
+    }
+
+    public bool GetGrounded()
+    {
+        return this.m_IsGrounded;
     }
 
     public float GetForwardVelocity()
