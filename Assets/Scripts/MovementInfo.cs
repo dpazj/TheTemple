@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class MovementInfo : MonoBehaviour {
 
-    public float forwardVelocity { get; private set;}
-    public float straffeVelocity { get; private set; }
+    public float forwardVelocity { get;  set;}
+    public float straffeVelocity { get;  set; }
 
     public bool grounded { get; private set;}
     public bool wallrunnig { get; set;}
@@ -23,8 +23,6 @@ public class MovementInfo : MonoBehaviour {
     public float jumpAirControl = 0.4f;
 
 
-
-
     //Observes these classes
     PlayerController pc;
     WallrunAbility wallrun;
@@ -40,9 +38,7 @@ public class MovementInfo : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-        CheckGrounded();
-        forwardVelocity = pc.GetForwardVelocity();
-        
+        CheckGrounded();        
 	}
 
     private void CheckGrounded()
@@ -59,6 +55,14 @@ public class MovementInfo : MonoBehaviour {
         {
             grounded = false;
         }
+    }
 
+
+    private void OnGUI()
+    {
+        GUI.Label(new Rect(0, 0, 200, 100), "Forward Velocity: " + forwardVelocity.ToString());
+        GUI.Label(new Rect(0, 10, 200, 100), "Straffe Velocity: " + straffeVelocity.ToString());
+        GUI.Label(new Rect(0, 20, 100, 100), Input.GetAxis("Horizontal").ToString());
+        GUI.Label(new Rect(0, 30, 100, 100), Input.GetAxis("Vertical").ToString());
     }
 }

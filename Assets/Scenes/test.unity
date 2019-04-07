@@ -1356,7 +1356,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1979016233
+--- !u!1001 &1927426229
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -1395,52 +1395,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 15
       objectReference: {fileID: 0}
-    - target: {fileID: 114173877360106656, guid: 2a34d943edbca174c8a918669ad7e458,
-        type: 2}
-      propertyPath: wallrunDistanceModifier
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4783338731480072, guid: 2a34d943edbca174c8a918669ad7e458, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4783338731480072, guid: 2a34d943edbca174c8a918669ad7e458, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4783338731480072, guid: 2a34d943edbca174c8a918669ad7e458, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4783338731480072, guid: 2a34d943edbca174c8a918669ad7e458, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4783338731480072, guid: 2a34d943edbca174c8a918669ad7e458, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 20876435890443658, guid: 2a34d943edbca174c8a918669ad7e458,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 20876435890443658, guid: 2a34d943edbca174c8a918669ad7e458,
-        type: 2}
-      propertyPath: orthographic
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 20876435890443658, guid: 2a34d943edbca174c8a918669ad7e458,
-        type: 2}
-      propertyPath: field of view
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 114173877360106656, guid: 2a34d943edbca174c8a918669ad7e458,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 114173877360106656, guid: 2a34d943edbca174c8a918669ad7e458, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2a34d943edbca174c8a918669ad7e458, type: 2}
   m_IsPrefabParent: 0

@@ -4,42 +4,25 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-
-    private float m_ForwardVelocity;
-    private float m_StraffeVelocity;
-
-    private bool m_Jump;
-    
-    private bool m_Moving;
-    
-    //Components 
+     
     private Rigidbody m_RigidBody;
-    private Camera m_Cam;
-  
     private MovementInfo movementInfo;
 
-    //initialization
     private void Start () {
         m_RigidBody = GetComponent<Rigidbody>();
-        m_Cam = GetComponentInChildren<Camera>();
-       
+              
         movementInfo = GetComponentInChildren<MovementInfo>();
         //prevents rigidbody falling over
         m_RigidBody.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX;
         Cursor.lockState = CursorLockMode.Locked;
 
-        m_ForwardVelocity = 0;
-        m_StraffeVelocity = 0;
+        movementInfo.forwardVelocity = 0;
+        movementInfo.straffeVelocity = 0;
 
     }
 	
 	private void Update ()
     {
-        /*/Check jump pressed
-        if (!m_Jump && Input.GetKey(KeyCode.Space))
-        {
-            m_Jump = false;
-        }*/
 
         if (Input.GetKey(KeyCode.Escape))
         {
@@ -59,8 +42,8 @@ public class PlayerController : MonoBehaviour {
 
         GetSpeed(h, v);
 
-        if (v == 0) { m_ForwardVelocity = 0; }
-        if (h == 0) { m_StraffeVelocity = 0; }
+        if (v == 0) { movementInfo.forwardVelocity = 0; }
+        if (h == 0) { movementInfo.straffeVelocity = 0; }
 
         if (!movementInfo.grounded && movementInfo.jumping)
         {
@@ -77,30 +60,7 @@ public class PlayerController : MonoBehaviour {
 
         h *= Time.deltaTime;
         v *= Time.deltaTime;
-        transform.Translate(h * Mathf.Abs(m_StraffeVelocity), 0, v * Mathf.Abs(m_ForwardVelocity));
-
-        /*
-        if (movementInfo.grounded)
-        {
-            if (m_Jump)
-            {
-                m_RigidBody.velocity = new Vector3(m_RigidBody.velocity.x, 0f, m_RigidBody.velocity.z);
-                m_RigidBody.AddForce(new Vector3(0f, m_JumpForce, 0f), ForceMode.Impulse);
-                movementInfo.jumping = true;
-                if (m_ForwardVelocity > 1)
-                {
-                    m_ForwardJump = true;
-                }
-                else if (m_ForwardVelocity < 1)
-                {
-                    m_ForwardJump = false;
-                }
-
-            }
-        }
-
-        m_Jump = false;
-        */
+        transform.Translate(h * Mathf.Abs(movementInfo.straffeVelocity), 0, v * Mathf.Abs(movementInfo.forwardVelocity));
     }
 
    
@@ -110,8 +70,8 @@ public class PlayerController : MonoBehaviour {
         if (!movementInfo.grounded) { return; }
         bool run = Input.GetKey(KeyCode.LeftShift);
 
-        float forwardVelocity = m_ForwardVelocity;
-        float straffeVelocity = m_StraffeVelocity;
+        float forwardVelocity = movementInfo.forwardVelocity;
+        float straffeVelocity = movementInfo.straffeVelocity;
 
         int forwardMultiplier = ((v >= 0) ? 1 : -1);
         
@@ -161,25 +121,8 @@ public class PlayerController : MonoBehaviour {
         //smooths transition from moving forwards to backwards and vice versa
         if (forwardMultiplier == -1 && forwardVelocity > 0) { forwardVelocity = -0.5f; }
         if (forwardMultiplier == 1 && forwardVelocity < 0) { forwardVelocity = 0.5f; }
-        
-        m_ForwardVelocity = forwardVelocity;
-        m_StraffeVelocity = straffeVelocity;
-    }
 
-
-    public float GetForwardVelocity()
-    {
-        return this.m_ForwardVelocity;
+        movementInfo.forwardVelocity = forwardVelocity;
+        movementInfo.straffeVelocity = straffeVelocity;
     }
-
-    private void OnGUI()
-    {
-        GUI.Label(new Rect(0, 0, 200, 100), "Forward Velocity: " + m_ForwardVelocity.ToString());
-        GUI.Label(new Rect(0, 10, 200, 100), "Straffe Velocity: " + m_StraffeVelocity.ToString());
-        GUI.Label(new Rect(0, 20, 100, 100), Input.GetAxis("Horizontal").ToString());
-        GUI.Label(new Rect(0, 30, 100, 100), Input.GetAxis("Vertical").ToString());
-        GUI.Label(new Rect(0, 40, 100, 100), m_Cam.transform.eulerAngles.y.ToString());
-    }
-        
-    
 }
