@@ -52,7 +52,15 @@ public class PlayerCamController : MonoBehaviour {
         while(counter < time)
         {
             counter += Time.deltaTime;
-            rotation +=  (Mathf.Abs(rotation - rot) * (counter / time));
+            if(rot > rotation)
+            {
+                rotation += (Mathf.Abs(rotation - rot) * (counter / time));
+            }
+            else
+            {
+                rotation -= (Mathf.Abs(rotation - rot) * (counter / time));
+            }
+            
             yield return new WaitForFixedUpdate();
         }
         rotation = rot;
