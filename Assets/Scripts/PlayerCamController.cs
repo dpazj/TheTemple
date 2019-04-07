@@ -10,14 +10,15 @@ public class PlayerCamController : MonoBehaviour {
     public float sensitivity = 2.0f;
     public float smoothing = 2.0f;
 
-    private float rotation = 0f;
+    private float rotation;
+    private bool rotating;
 
     GameObject character;
 
 	// Use this for initialization
 	void Start () {
         character = this.transform.parent.gameObject;
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -31,15 +32,35 @@ public class PlayerCamController : MonoBehaviour {
 
         transform.localRotation = Quaternion.AngleAxis(-mouseLook.y, Vector3.right);
         character.transform.localRotation = Quaternion.AngleAxis(mouseLook.x, character.transform.up);
-
-
-        //rotate to desired angle 
+        Debug.Log(rotation);
         transform.Rotate(0, 0, rotation);
+
     }
 
-    public void setCameraRotation(float rot)
+    public void setCameraRotation(float rot, float time)
     {
-        this.rotation = rot;
+        //rotation = rot;
+        //if (rotating) { return; }
+        StartCoroutine(smoothRot(rot, time));
     }
+
+    IEnumerator smoothRot(float rot, float time)
+    {
+        rotating = true;
+        float counter = 0;
+        float startRot = rotation;
+        while(counter < time)
+        {
+            counter += Time.deltaTime;
+            rotation +=  (Mathf.Abs(rotation - rot) * (counter / time));
+            yield return new WaitForFixedUpdate();
+        }
+        rotation = rot;
+        rotating = false;
+
+    }
+
+    
+  
 
 }

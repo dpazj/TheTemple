@@ -141,27 +141,32 @@ public class WallrunAbility : MonoBehaviour {
     private void cancelWallRun()
     {
         movementInfo.canWallRun = m_WallRunning ? false : true;
+        if (m_WallRunning)
+        {
+            normalCameraTilt();
+        }
         m_WallRunning = false;
         m_RigidBody.useGravity = true;
 
-        normalCameraTilt();
+        
     }
 
     private void tiltCamera()
     {
         if (m_RightPress) //if wall running on the right tilt camera left
         {
-            m_PlayerCam.setCameraRotation(10);
+            m_PlayerCam.setCameraRotation(15, 0.5f);
         }
         else //if wall running on the left tilt camera right
         {
-            m_PlayerCam.setCameraRotation(-10);
+            m_PlayerCam.setCameraRotation(-15, 0.5f);
         }
 
     }
 
     private void normalCameraTilt()
     {
-        m_PlayerCam.setCameraRotation(0);
+        Debug.Log("Reset");
+        m_PlayerCam.setCameraRotation(0, 1f);
     }
 }
