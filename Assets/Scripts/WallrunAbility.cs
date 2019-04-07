@@ -15,8 +15,6 @@ public class WallrunAbility : MonoBehaviour {
     private bool m_WallRunning = false;
     private bool m_LeftPress = false;
     private bool m_RightPress = false;
-    
-
 
     private readonly float wallrunDistanceModifier = 3.0f;
     private float wallRunHeight;
@@ -60,7 +58,7 @@ public class WallrunAbility : MonoBehaviour {
 
     private void WallRun()
     {
-        if (!movementInfo.canWallRun) { Debug.Log("A"); return; }
+        if (!movementInfo.canWallRun) {return; }
 
         if (movementInfo.forwardVelocity < (movementInfo.maxSpeed * 0.75)) //player must be at least at 75% of max speed to wall run
         {
