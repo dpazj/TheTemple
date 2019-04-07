@@ -5,16 +5,16 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
     //basic movement
-    public float m_MaxSpeed = 8.0f;
-    public float m_WalkSpeed = 4.0f;
-    public float m_RunModifier = 0.1f;
-    public float m_WalkModifier = 0.1f;
+    private float m_MaxSpeed = 8.0f;
+    private float m_WalkSpeed = 4.0f;
+    private float m_RunModifier = 0.1f;
+    private float m_WalkModifier = 0.1f;
 
     private float m_ForwardVelocity;
     private float m_StraffeVelocity;
 
 
-    public float m_JumpForce = 70.0f;
+    private float m_JumpForce = 70.0f;
     private float m_JumpAirControl = 0.4f; 
 
     private bool m_Jump;
@@ -29,32 +29,34 @@ public class PlayerController : MonoBehaviour {
     private Camera m_Cam;
     private PlayerCamController m_PlayerCam;
 
-    //Wall jump stuff
-    private RaycastHit m_rcRight;
-    private RaycastHit m_rcLeft;
+    /* //Wall jump stuff
+     private RaycastHit m_rcRight;
+     private RaycastHit m_rcLeft;
 
 
-    private bool m_WallRunning = false;
-    private bool m_LeftPress = false;
-    private bool m_RightPress = false;
-    private bool canWallRun = true;
+     private bool m_WallRunning = false;
+     private bool m_LeftPress = false;
+     private bool m_RightPress = false;
+     private bool canWallRun = true;
 
 
-    private readonly float wallrunDistanceModifier = 3.0f;
-    private float wallRunHeight;
+     private readonly float wallrunDistanceModifier = 3.0f;
+     private float wallRunHeight;
 
-    private float wallrunSpeed;
-    private float wallRunDistance;
-    private float wallRunDistanceDone;
-    private float cameraRotate = 0;
+     private float wallrunSpeed;
+     private float wallRunDistance;
+     private float wallRunDistanceDone;
+     private float cameraRotate = 0;*/
 
+    private MovementInfo movementInfo;
 
     //initialization
     private void Start () {
         m_RigidBody = GetComponent<Rigidbody>();
         m_Capsule = GetComponent<CapsuleCollider>();
         m_Cam = GetComponentInChildren<Camera>();
-        m_PlayerCam = GetComponentInChildren<PlayerCamController>(); 
+        m_PlayerCam = GetComponentInChildren<PlayerCamController>();
+        movementInfo = GetComponentInChildren<MovementInfo>();
         //prevents rigidbody falling over
         m_RigidBody.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX;
         Cursor.lockState = CursorLockMode.Locked;
@@ -76,7 +78,7 @@ public class PlayerController : MonoBehaviour {
             Cursor.lockState = CursorLockMode.None;
         }
 
-        if (Input.GetKey(KeyCode.Q))
+        /*if (Input.GetKey(KeyCode.Q))
         {
             m_LeftPress = true;
             m_RightPress = false;
@@ -89,14 +91,14 @@ public class PlayerController : MonoBehaviour {
         else
         {
             m_LeftPress = m_RightPress = false;
-        }
+        }*/
     }
 
     private void FixedUpdate()
     {
         CheckGrounded();
         Movement();
-        WallRun();
+        
     }
 
     private void Movement()
@@ -149,6 +151,7 @@ public class PlayerController : MonoBehaviour {
         m_Jump = false;
     }
 
+    /*
     private void WallRun()
     {
         if (!canWallRun) { Debug.Log("A"); return;}
@@ -240,10 +243,10 @@ public class PlayerController : MonoBehaviour {
 
     private void cancelWallRun()
     {
-        canWallRun = m_WallRunning ?  false : true;
+        canWallRun = m_WallRunning ? false : true;
         m_WallRunning = false;
         m_RigidBody.useGravity = true;
-        
+
         normalCameraTilt();
     }
 
@@ -264,6 +267,7 @@ public class PlayerController : MonoBehaviour {
     {
         m_PlayerCam.setCameraRotation(0);
     }
+    */
 
 
     private void GetSpeed(float h, float v){
@@ -334,7 +338,7 @@ public class PlayerController : MonoBehaviour {
         {
             m_IsGrounded = true;
             m_Jumping = false;
-            canWallRun = true;
+            movementInfo.canWallRun = true;
         }
         else
         {
