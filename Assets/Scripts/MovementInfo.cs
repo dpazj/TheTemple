@@ -8,7 +8,7 @@ public class MovementInfo : MonoBehaviour {
     public float straffeVelocity { get;  set; }
 
     public bool grounded { get; private set;}
-    public bool wallrunnig { get; set;}
+    public bool wallRunning { get; set;}
     public bool canWallRun { get;  set; }
     public bool jumping;
     public bool forwardJump;
@@ -39,6 +39,7 @@ public class MovementInfo : MonoBehaviour {
     void Start () {
         capsule = GetComponent<CapsuleCollider>();
         cameraController = transform.Find("Camera").GetComponent<PlayerCamController>();
+        wallRunning = false;
 	}
 	
 	// Update is called once per frame
@@ -55,13 +56,19 @@ public class MovementInfo : MonoBehaviour {
         {
             grounded = true;
             jumping = false;
-            cameraController.setCameraRotation(0,0.4f);
+            rotateCamera(0,0.4f);
             
         }
         else
         {
             grounded = false;
         }
+    }
+
+
+    public void rotateCamera(float rot, float time)
+    {
+        cameraController.setCameraRotation(rot, time);
     }
 
     

@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 23314942050132522}
   - component: {fileID: 114413778725272240}
   - component: {fileID: 114501109560086810}
+  - component: {fileID: 114520156477643976}
   - component: {fileID: 114965936856998766}
   - component: {fileID: 114078157496648838}
   - component: {fileID: 54278482153182706}
@@ -308,6 +309,19 @@ MonoBehaviour:
   walkModifier: 0.1
   jumpForce: 70
   jumpAirControl: 0.4
+  wallRunHeight: 2.5
+  wallRunDistanceModifier: 8
+--- !u!114 &114520156477643976
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1439808475045820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f6dfad6f54d2f846b05c980f9ffd0a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114636936917444768
 MonoBehaviour:
   m_ObjectHideFlags: 1

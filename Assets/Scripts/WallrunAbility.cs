@@ -5,16 +5,13 @@ using UnityEngine;
 public class WallrunAbility : MonoBehaviour {
 
     private MovementInfo movementInfo;
-    private PlayerCamController m_PlayerCam;
-    private Rigidbody m_RigidBody;
+    private Rigidbody rigidBody;
 
-    private RaycastHit m_rcRight;
-    private RaycastHit m_rcLeft;
+    private RaycastHit rcRight;
+    private RaycastHit rcLeft;
 
-
-    private bool m_WallRunning = false;
-    private bool m_LeftPress = false;
-    private bool m_RightPress = false;
+    private bool leftPress = false;
+    private bool rightPress = false;
 
     private readonly float wallrunDistanceModifier = 3.0f;
 
@@ -25,25 +22,25 @@ public class WallrunAbility : MonoBehaviour {
     // Use this for initialization
     void Start () {
         movementInfo = GetComponent<MovementInfo>();
-        m_RigidBody = GetComponent<Rigidbody>();
-        m_PlayerCam = GetComponentInChildren<PlayerCamController>();
+        rigidBody = GetComponent<Rigidbody>();
+        
     }
 	
 	// Update is called once per frame
 	void Update () {
         if (Input.GetKey(KeyCode.Q))
         {
-            m_LeftPress = true;
-            m_RightPress = false;
+            leftPress = true;
+            rightPress = false;
         }
         else if (Input.GetKey(KeyCode.E))
         {
-            m_LeftPress = false;
-            m_RightPress = true;
+            leftPress = false;
+            rightPress = true;
         }
         else
         {
-            m_LeftPress = m_RightPress = false;
+            leftPress = rightPress = false;
         }
     }
 
@@ -63,11 +60,11 @@ public class WallrunAbility : MonoBehaviour {
             return;
         }
 
-        if (m_RightPress)
+        if (rightPress)
         {
-            if (Physics.Raycast(transform.position, transform.right, out m_rcRight, 1) && m_rcRight.transform.tag == "Wall") //if player is toutching wall and pressing correct key
+            if (Physics.Raycast(transform.position, transform.right, out rcRight, 1) && rcRight.transform.tag == "Wall") //if player is toutching wall and pressing correct key
             {
-                if (!m_WallRunning) //now we need to check if player has been wall running already
+                if (!movementInfo.wallRunning) //now we need to check if player has been wall running already
                 {
                     initWallRun(); //initialise wall run trajectory
                     continueWallRun();
@@ -82,12 +79,12 @@ public class WallrunAbility : MonoBehaviour {
                 cancelWallRun();
             }
         }
-        else if (m_LeftPress)
+        else if (leftPress)
         {
-            if (Physics.Raycast(transform.position, -transform.right, out m_rcLeft, 1) && m_rcLeft.transform.tag == "Wall") //if player is toutching wall and pressing correct key
+            if (Physics.Raycast(transform.position, -transform.right, out rcLeft, 1) && rcLeft.transform.tag == "Wall") //if player is toutching wall and pressing correct key
             {
                 //now we need to check if player has been wall running already
-                if (!m_WallRunning)
+                if (!movementInfo.wallRunning)
                 {
                     //initialise wall run trajectory
                     initWallRun();
@@ -118,15 +115,15 @@ public class WallrunAbility : MonoBehaviour {
 
         wallRunDistance = wallrunDistanceModifier * wallrunSpeed;
         wallRunDistanceDone = 0;
-        m_WallRunning = true;
-        m_RigidBody.useGravity = false;
-        m_RigidBody.velocity = Vector3.zero;
+        movementInfo.wallRunning = true;
+        rigidBody.useGravity = false;
+        rigidBody.velocity = Vector3.zero;
         tiltCamera();
     }
 
     private void continueWallRun()
     {
-        m_RigidBody.velocity = Vector3.zero;
+        rigidBody.velocity = Vector3.zero;
         //runs along a sine curve
         wallRunDistanceDone += wallrunSpeed * Time.deltaTime;
         float up = (movementInfo.wallRunHeight * Mathf.Sin(movementInfo.wallRunDistanceModifier * (wallRunDistanceDone / wallRunDistance)));
@@ -139,27 +136,27 @@ public class WallrunAbility : MonoBehaviour {
     private void cancelWallRun()
     {
         
-        movementInfo.canWallRun = m_WallRunning ? false : true;
-        if (m_WallRunning){normalCameraTilt();}
-        m_WallRunning = false;
-        m_RigidBody.useGravity = true;
+        movementInfo.canWallRun = movementInfo.wallRunning ? false : true;
+        if (movementInfo.wallRunning) {normalCameraTilt();}
+        movementInfo.wallRunning = false;
+        rigidBody.useGravity = true;
     }
 
     private void tiltCamera()
     {
-        if (m_RightPress) //if wall running on the right tilt camera left
+        if (rightPress) //if wall running on the right tilt camera left
         {
-            m_PlayerCam.setCameraRotation(15, 0.5f);
+            movementInfo.rotateCamera(15, 0.5f);
         }
         else //if wall running on the left tilt camera right
         {
-            m_PlayerCam.setCameraRotation(-15, 0.5f);
+            movementInfo.rotateCamera(-15, 0.5f);
         }
 
     }
 
     private void normalCameraTilt()
     {
-        //m_PlayerCam.setCameraRotation(0, 0.3f);
+        movementInfo.rotateCamera(0, 0.4f);
     }
 }

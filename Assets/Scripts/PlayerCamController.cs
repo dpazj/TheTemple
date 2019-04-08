@@ -16,6 +16,8 @@ public class PlayerCamController : MonoBehaviour {
     GameObject character;
     MovementInfo movementInfo;
 
+    private IEnumerator rotateCoroutine;
+
 	// Use this for initialization
 	void Start () {
         character = this.transform.parent.gameObject;
@@ -47,14 +49,18 @@ public class PlayerCamController : MonoBehaviour {
 
     public void setCameraRotation(float rot, float time)
     {
-        if (rotating) { return; }
-        StartCoroutine(smoothRot(rot, time));
+        if(rotateCoroutine != null)
+        {
+            StopCoroutine(rotateCoroutine);
+        }
+        
+        if (rot == rotation) { return;}
+        rotateCoroutine = smoothRot(rot, time);
+        StartCoroutine(rotateCoroutine);
     }
 
     IEnumerator smoothRot(float rot, float time)
     {
-        if(rot == rotation) { yield break; }
-        rotating = true;
         float counter = 0;
 
         while(counter < time)
@@ -73,7 +79,6 @@ public class PlayerCamController : MonoBehaviour {
             yield return new WaitForFixedUpdate();
         }
         rotation = rot;
-        rotating = false;
     }
 
     
