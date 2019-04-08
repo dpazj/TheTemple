@@ -13,32 +13,38 @@ public class MovementInfo : MonoBehaviour {
     public bool jumping;
     public bool forwardJump;
 
-    //Settings
+    
+    //Movement Settings
     public float maxSpeed = 8.0f;
     public float walkSpeed = 4.0f;
     public float runModifier = 0.1f;
     public float walkModifier = 0.1f;
 
+    //Jump Settings
     public float jumpForce = 70.0f;
     public float jumpAirControl = 0.4f;
 
+    //Wall run Settings
+    public float wallRunHeight = 2.5f;
+    public float wallRunDistanceModifier = 8f;
+    
+
 
     //Observes these classes
-    PlayerController pc;
-    WallrunAbility wallrun;
     CapsuleCollider capsule;
+    PlayerCamController cameraController;
     
 
     // Use this for initialization
     void Start () {
-        pc = GetComponent<PlayerController>();
-        wallrun = GetComponent<WallrunAbility>();
         capsule = GetComponent<CapsuleCollider>();
+        cameraController = transform.Find("Camera").GetComponent<PlayerCamController>();
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-        CheckGrounded();        
+        CheckGrounded();
+        
 	}
 
     private void CheckGrounded()
@@ -49,7 +55,8 @@ public class MovementInfo : MonoBehaviour {
         {
             grounded = true;
             jumping = false;
-            canWallRun = true;
+            cameraController.setCameraRotation(0,0.4f);
+            
         }
         else
         {
@@ -57,6 +64,7 @@ public class MovementInfo : MonoBehaviour {
         }
     }
 
+    
 
     private void OnGUI()
     {

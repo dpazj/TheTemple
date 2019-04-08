@@ -14,10 +14,12 @@ public class PlayerCamController : MonoBehaviour {
     private bool rotating;
 
     GameObject character;
+    MovementInfo movementInfo;
 
 	// Use this for initialization
 	void Start () {
         character = this.transform.parent.gameObject;
+        movementInfo = transform.parent.GetComponent<MovementInfo>();
     }
 	
 	// Update is called once per frame
@@ -32,40 +34,46 @@ public class PlayerCamController : MonoBehaviour {
 
         transform.localRotation = Quaternion.AngleAxis(-mouseLook.y, Vector3.right);
         character.transform.localRotation = Quaternion.AngleAxis(mouseLook.x, character.transform.up);
-        Debug.Log(rotation);
+
+        
         transform.Rotate(0, 0, rotation);
+
+        if(rotation == 0)
+        {
+            movementInfo.canWallRun = true;
+        }
 
     }
 
     public void setCameraRotation(float rot, float time)
     {
-        //rotation = rot;
-        //if (rotating) { return; }
+        if (rotating) { return; }
         StartCoroutine(smoothRot(rot, time));
     }
 
     IEnumerator smoothRot(float rot, float time)
     {
+        if(rot == rotation) { yield break; }
         rotating = true;
         float counter = 0;
-        float startRot = rotation;
+
         while(counter < time)
         {
+            
             counter += Time.deltaTime;
-            if(rot > rotation)
+            if(rot < rotation)
             {
-                rotation += (Mathf.Abs(rotation - rot) * (counter / time));
+                rotation -= (Mathf.Abs(rotation - rot) * (counter / time));
             }
             else
             {
-                rotation -= (Mathf.Abs(rotation - rot) * (counter / time));
+                rotation += (Mathf.Abs(rotation - rot) * (counter / time));
             }
             
             yield return new WaitForFixedUpdate();
         }
         rotation = rot;
         rotating = false;
-
     }
 
     

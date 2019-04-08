@@ -17,16 +17,14 @@ public class WallrunAbility : MonoBehaviour {
     private bool m_RightPress = false;
 
     private readonly float wallrunDistanceModifier = 3.0f;
-    private float wallRunHeight;
 
     private float wallrunSpeed;
     private float wallRunDistance;
     private float wallRunDistanceDone;
-    private float cameraRotate = 0;
 
     // Use this for initialization
     void Start () {
-        movementInfo = GetComponentInChildren<MovementInfo>();
+        movementInfo = GetComponent<MovementInfo>();
         m_RigidBody = GetComponent<Rigidbody>();
         m_PlayerCam = GetComponentInChildren<PlayerCamController>();
     }
@@ -117,7 +115,6 @@ public class WallrunAbility : MonoBehaviour {
 
         //here we save the value of the speed starting the wall run to be used later
         wallrunSpeed = movementInfo.forwardVelocity;
-        wallRunHeight = 2.75f * (wallrunSpeed / movementInfo.maxSpeed);
 
         wallRunDistance = wallrunDistanceModifier * wallrunSpeed;
         wallRunDistanceDone = 0;
@@ -129,26 +126,23 @@ public class WallrunAbility : MonoBehaviour {
 
     private void continueWallRun()
     {
+        m_RigidBody.velocity = Vector3.zero;
         //runs along a sine curve
         wallRunDistanceDone += wallrunSpeed * Time.deltaTime;
-        float up = (2.75f * Mathf.Sin(8f * (wallRunDistanceDone / wallRunDistance)));
+        float up = (movementInfo.wallRunHeight * Mathf.Sin(movementInfo.wallRunDistanceModifier * (wallRunDistanceDone / wallRunDistance)));
         transform.Translate(0, up * Time.deltaTime, 0);
 
-        if ((wallRunDistanceDone / wallRunDistance) >= 0.7) { cancelWallRun(); }
+        if ((wallRunDistanceDone / wallRunDistance) >= 0.7) { cancelWallRun();}
     }
 
 
     private void cancelWallRun()
     {
+        
         movementInfo.canWallRun = m_WallRunning ? false : true;
-        if (m_WallRunning)
-        {
-            normalCameraTilt();
-        }
+        if (m_WallRunning){normalCameraTilt();}
         m_WallRunning = false;
         m_RigidBody.useGravity = true;
-
-        
     }
 
     private void tiltCamera()
@@ -166,7 +160,6 @@ public class WallrunAbility : MonoBehaviour {
 
     private void normalCameraTilt()
     {
-        Debug.Log("Reset");
-        m_PlayerCam.setCameraRotation(0, 1f);
+        //m_PlayerCam.setCameraRotation(0, 0.3f);
     }
 }

@@ -1419,6 +1419,11 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114501109560086810, guid: 2a34d943edbca174c8a918669ad7e458,
+        type: 2}
+      propertyPath: wallRunHeight
+      value: 2.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2a34d943edbca174c8a918669ad7e458, type: 2}
   m_IsPrefabParent: 0
