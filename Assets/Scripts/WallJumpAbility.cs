@@ -5,9 +5,7 @@ using UnityEngine;
 public class WallJumpAbility : MonoBehaviour {
 
     private MovementInfo movementInfo;
-    private PlayerCamController playerCam;
     private Rigidbody rigidBody;
-    private CapsuleCollider capsuleCollider;
 
     private bool wallJump = false;
 
@@ -17,8 +15,6 @@ public class WallJumpAbility : MonoBehaviour {
     void Start () {
         movementInfo = GetComponent<MovementInfo>();
         rigidBody = GetComponent<Rigidbody>();
-        capsuleCollider = GetComponent<CapsuleCollider>();
-        playerCam = GetComponentInChildren<PlayerCamController>();
     }
 	
 	void Update () {
