@@ -1,9 +1,7 @@
 fileFormatVersion: 2
 guid: b14d8c302663b48c0ba38a0be6e1765a
-timeCreated: 1498965723
-licenseType: Store
 ModelImporter:
-  serializedVersion: 21
+  serializedVersion: 22
   fileIDToRecycleName:
     100000: Cylinder.018
     100002: //RootNode
@@ -19,10 +17,27 @@ ModelImporter:
     4300002: Cylinder.018
     6400000: Cylinder.018
     6400002: Icosphere.012
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Leaves1
+    second: {fileID: 2100000, guid: 43ff59de8b6b4d34aa8f68da70b6d1c4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Leaves3
+    second: {fileID: 2100000, guid: 2ee32eb6df3e7f04080426180c5cb8fd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wood5
+    second: {fileID: 2100000, guid: 5dc18e06cac7fe6479db3a01981675e8, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
     materialSearch: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -35,6 +50,7 @@ ModelImporter:
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
@@ -59,6 +75,8 @@ ModelImporter:
     optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 1
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
