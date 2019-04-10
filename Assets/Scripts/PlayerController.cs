@@ -113,9 +113,9 @@ public class PlayerController : MonoBehaviour {
         {
             straffeVelocity = movementInfo.maxSpeed / 2;
         }
-        else if (!run && Mathf.Abs(straffeVelocity) > movementInfo.walkSpeed / 2)
+        else if (!run && Mathf.Abs(straffeVelocity) > movementInfo.walkSpeed)
         {
-            straffeVelocity = movementInfo.walkSpeed / 2;
+            straffeVelocity = movementInfo.walkSpeed;
         }
 
         //smooths transition from moving forwards to backwards and vice versa
