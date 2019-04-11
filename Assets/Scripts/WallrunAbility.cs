@@ -62,7 +62,7 @@ public class WallrunAbility : MonoBehaviour {
 
         if (rightPress)
         {
-            if (Physics.Raycast(transform.position, transform.right, out rcRight, 1) && rcRight.transform.tag == "Wall") //if player is toutching wall and pressing correct key
+            if (Physics.Raycast(transform.position, transform.right, out rcRight, 1.3f) && rcRight.transform.tag == "Wall") //if player is toutching wall and pressing correct key
             {
                 if (!movementInfo.wallRunning) //now we need to check if player has been wall running already
                 {
@@ -81,7 +81,7 @@ public class WallrunAbility : MonoBehaviour {
         }
         else if (leftPress)
         {
-            if (Physics.Raycast(transform.position, -transform.right, out rcLeft, 1) && rcLeft.transform.tag == "Wall") //if player is toutching wall and pressing correct key
+            if (Physics.Raycast(transform.position, -transform.right, out rcLeft, 1.3f) && rcLeft.transform.tag == "Wall") //if player is toutching wall and pressing correct key
             {
                 //now we need to check if player has been wall running already
                 if (!movementInfo.wallRunning)

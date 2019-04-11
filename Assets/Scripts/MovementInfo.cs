@@ -6,7 +6,6 @@ public class MovementInfo : MonoBehaviour {
 
     public float forwardVelocity { get;  set;}
     public float straffeVelocity { get;  set; }
-
     public bool grounded { get; private set;}
     public bool wallRunning { get; set;}
     public bool canWallRun { get;  set; }
@@ -27,6 +26,8 @@ public class MovementInfo : MonoBehaviour {
     //Wall run Settings
     public float wallRunHeight = 2.5f;
     public float wallRunDistanceModifier = 8f;
+
+    public float wallJumpCoolDown = 0.5f;
     
 
 
@@ -55,9 +56,7 @@ public class MovementInfo : MonoBehaviour {
         if (Physics.SphereCast(transform.position, capsule.radius * (1.0f - 0.1f), Vector3.down, out hitInfo, ((capsule.height / 2f) - capsule.radius) + 0.1f, Physics.AllLayers, QueryTriggerInteraction.Ignore)) //Check if player is toutching ground
         {
             grounded = true;
-            jumping = false;
-            rotateCamera(0,0.4f);
-            
+            jumping = false; 
         }
         else
         {

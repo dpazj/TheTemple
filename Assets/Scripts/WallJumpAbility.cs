@@ -7,6 +7,7 @@ public class WallJumpAbility : MonoBehaviour {
     private MovementInfo movementInfo;
     private Rigidbody rigidBody;
 
+    private float coolDown = 0f;
     private bool wallJump = false;
 
     private RaycastHit rayhit;
@@ -18,15 +19,25 @@ public class WallJumpAbility : MonoBehaviour {
     }
 	
 	void Update () {
+        if(coolDown > 0)
+        {
+            coolDown -= Time.deltaTime;
+        }
+       
 		if(Input.GetKeyDown(KeyCode.Space) && !wallJump && !movementInfo.grounded && (movementInfo.jumping || movementInfo.wallRunning)) //Player has to be jumping/wall running
         {
-            wallJump = true;
+            if(coolDown <= 0)
+            {
+                wallJump = true;
+            }
+            
         }
         
     }
 
     private void FixedUpdate()
     {
+
         if (wallJump)
         {
             if (movementInfo.wallRunning)
@@ -39,6 +50,7 @@ public class WallJumpAbility : MonoBehaviour {
                 {
                     wallRunJump();
                 }
+
                 wallJump = false;
             }
             
@@ -52,12 +64,14 @@ public class WallJumpAbility : MonoBehaviour {
         movementInfo.wallRunning = false;
         rigidBody.useGravity = true;
         applyForce(new Vector3(0f, 100f, 50f));
+        
     }
 
     private void applyForce(Vector3 force)
     {
-        rigidBody.velocity = new Vector3(rigidBody.velocity.x, 0f, rigidBody.velocity.z);
+        rigidBody.velocity = Vector3.zero;//new Vector3(rigidBody.velocity.x, 0f, rigidBody.velocity.z);
         rigidBody.AddForce(force, ForceMode.Impulse);
+        coolDown = movementInfo.wallJumpCoolDown;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -65,6 +79,7 @@ public class WallJumpAbility : MonoBehaviour {
         ContactPoint hit = collision.contacts[0];
         if (wallJump && hit.normal.y < 0.5f)
         {
+            Debug.Log("Wall - Jump");
             applyForce(new Vector3(0, 100f, 0));
             wallJump = false;
         }
