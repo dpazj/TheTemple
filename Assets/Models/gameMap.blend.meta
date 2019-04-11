@@ -20,6 +20,8 @@ ModelImporter:
     2100016: Snow
     2100018: Mud
     2100020: Path
+    2100022: DarkSand
+    2100024: Sand
     2300000: Ocean
     2300002: WorldMap
     3300000: Ocean
