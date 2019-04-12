@@ -42,11 +42,8 @@ GameObject:
   - component: {fileID: 33572611490952002}
   - component: {fileID: 136169532471551546}
   - component: {fileID: 23314942050132522}
-  - component: {fileID: 114413778725272240}
+  - component: {fileID: 114671217339272086}
   - component: {fileID: 114501109560086810}
-  - component: {fileID: 114520156477643976}
-  - component: {fileID: 114965936856998766}
-  - component: {fileID: 114078157496648838}
   - component: {fileID: 54278482153182706}
   - component: {fileID: 96904232541496662}
   m_Layer: 0
@@ -63,8 +60,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1439808475045820}
   m_LocalRotation: {x: -0, y: 0.8388571, z: -0, w: 0.54435176}
-  m_LocalPosition: {x: -6.5, y: 35.73, z: -345.79}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 170.35, y: 18.68, z: -253.05}
+  m_LocalScale: {x: 0.7, y: 1, z: 0.7}
   m_Children:
   - {fileID: 4783338731480072}
   m_Father: {fileID: 0}
@@ -269,28 +266,6 @@ TrailRenderer:
     generateLightingData: 0
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
---- !u!114 &114078157496648838
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1439808475045820}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b171397651c03d24d90bea274b223416, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114413778725272240
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1439808475045820}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69b7ed9a500ac184390693efe282a7c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114501109560086810
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -302,8 +277,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fbdeabb027323d4fbb8de68502ec0ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumping: 0
-  forwardJump: 0
   maxSpeed: 8
   walkSpeed: 4
   runModifier: 0.1
@@ -313,17 +286,6 @@ MonoBehaviour:
   wallRunHeight: 2.5
   wallRunDistanceModifier: 12
   wallJumpCoolDown: 0.5
---- !u!114 &114520156477643976
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1439808475045820}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f6dfad6f54d2f846b05c980f9ffd0a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114636936917444768
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -349,7 +311,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   profile: {fileID: 11400000, guid: 09417ff1f0e90854fbfb2dd4d9265a0f, type: 2}
---- !u!114 &114965936856998766
+--- !u!114 &114671217339272086
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -357,9 +319,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1439808475045820}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07a143632b7f17e49ad435683cd53516, type: 3}
+  m_Script: {fileID: 11500000, guid: 8ee2649772bcc24489f828b3642ada7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controllable: 1
+  canJump: 1
+  canWallrun: 1
+  canWallJump: 1
 --- !u!124 &124775566166226596
 Behaviour:
   m_ObjectHideFlags: 1

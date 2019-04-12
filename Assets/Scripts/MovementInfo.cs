@@ -9,7 +9,9 @@ public class MovementInfo : MonoBehaviour {
     public bool grounded { get; private set;}
     public bool wallRunning { get; set;}
     public bool canWallRun { get;  set; }
+    [System.NonSerialized]
     public bool jumping;
+    [System.NonSerialized]
     public bool forwardJump;
 
     
