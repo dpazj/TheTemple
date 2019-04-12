@@ -20,9 +20,10 @@ public class WallJumpAbility : MonoBehaviour {
 	
 	void Update () {
               
-		if(Input.GetKey(KeyCode.Space) && !wallJump && !movementInfo.grounded && (movementInfo.jumping || movementInfo.wallRunning)) //Player has to be jumping/wall running
+		if(Input.GetKeyDown(KeyCode.Space) && !wallJump) //Player has to be jumping/wall running
         {
-            if(movementInfo.wallJumpCounter < movementInfo.wallJumpWithoutReset)
+            Debug.Log(movementInfo.timeJumping);
+            if(movementInfo.wallJumpCounter < movementInfo.wallJumpWithoutReset && movementInfo.timeJumping > movementInfo.minJumpTime)
             {
                 wallJump = true;
             }
@@ -39,7 +40,7 @@ public class WallJumpAbility : MonoBehaviour {
             return;
         }
         
-        if (wallJump)
+        if (wallJump && !movementInfo.grounded && (movementInfo.jumping || movementInfo.wallRunning))
         {
             if (movementInfo.wallRunning)
             {
@@ -84,9 +85,15 @@ public class WallJumpAbility : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
+        
         ContactPoint hit = collision.contacts[0];
-        if (wallJump && hit.normal.y < 0.5f)
+        
+        
+       
+        if (wallJump && hit.normal.y < 0.1f)
         {
+            
+            Debug.DrawRay(hit.point, hit.normal, Color.red, 3f);
             applyForce(new Vector3(0, 100f, 0));
             wallJump = false;
         }

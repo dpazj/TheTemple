@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -31,6 +32,9 @@ public class MovementInfo : MonoBehaviour {
     //Jump Settings
     public float jumpForce = 70.0f;
     public float jumpAirControl = 0.4f;
+    public float minJumpTime = 0.5f;
+    [System.NonSerialized]
+    public float timeJumping = 0;
 
     //Wall run Settings
     public float wallRunHeight = 2.5f;
@@ -80,12 +84,18 @@ public class MovementInfo : MonoBehaviour {
             jumping = false;
             mustSwapWallrunSide = false;
             canWallRun = true;
-            resetWallJumpCounter();
+            resetCounters();
         }
         else
         {
             grounded = false;
         }
+    }
+
+    private void resetCounters()
+    {
+        timeJumping = 0;
+        resetWallJumpCounter();
     }
 
     public void resetWallJumpCounter()
@@ -107,6 +117,6 @@ public class MovementInfo : MonoBehaviour {
         GUI.Label(new Rect(0, 20, 100, 100), Input.GetAxis("Horizontal").ToString());
         GUI.Label(new Rect(0, 30, 100, 100), Input.GetAxis("Vertical").ToString());
         GUI.Label(new Rect(0, 40, 100, 100), "Fps:" + fps );
-        GUI.Label(new Rect(0, 50, 100, 100), "wall" + canWallRun.ToString());
+        
     }
 }
