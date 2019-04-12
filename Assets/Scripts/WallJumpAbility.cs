@@ -7,6 +7,7 @@ public class WallJumpAbility : MonoBehaviour {
     private MovementInfo movementInfo;
     private Rigidbody rigidBody;
 
+    
     private float coolDown = 0f;
     private bool wallJump = false;
 
@@ -26,9 +27,14 @@ public class WallJumpAbility : MonoBehaviour {
        
 		if(Input.GetKeyDown(KeyCode.Space) && !wallJump && !movementInfo.grounded && (movementInfo.jumping || movementInfo.wallRunning)) //Player has to be jumping/wall running
         {
-            if(coolDown <= 0)
+            if(coolDown <= 0 && movementInfo.wallJumpCounter <= movementInfo.wallJumpWithoutReset) //conditions to prevent spamming
             {
                 wallJump = true;
+            }
+            else
+            {
+                if(movementInfo.wallJumpCounter > movementInfo.wallJumpWithoutReset) { Debug.Log("Limit reached" + Time.time); }
+                
             }
             
         }
@@ -72,6 +78,7 @@ public class WallJumpAbility : MonoBehaviour {
         rigidBody.velocity = Vector3.zero;//new Vector3(rigidBody.velocity.x, 0f, rigidBody.velocity.z);
         rigidBody.AddForce(force, ForceMode.Impulse);
         coolDown = movementInfo.wallJumpCoolDown;
+        movementInfo.wallJumpCounter++;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -79,7 +86,7 @@ public class WallJumpAbility : MonoBehaviour {
         ContactPoint hit = collision.contacts[0];
         if (wallJump && hit.normal.y < 0.5f)
         {
-            Debug.Log("Wall - Jump");
+            Debug.Log("Wall - Jump" + movementInfo.wallJumpCounter);
             applyForce(new Vector3(0, 100f, 0));
             wallJump = false;
         }

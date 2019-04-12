@@ -110,9 +110,8 @@ public class WallrunAbility : MonoBehaviour {
     private void initWallRun()
     {
 
-        //here we save the value of the speed starting the wall run to be used later
-        wallrunSpeed = movementInfo.forwardVelocity;
-
+        movementInfo.resetWallJumpCounter(); //wall jump should reset when wall running
+        wallrunSpeed = movementInfo.forwardVelocity; //save the value of the speed starting the wall run to be used later
         wallRunDistance = wallrunDistanceModifier * wallrunSpeed;
         wallRunDistanceDone = 0;
         movementInfo.wallRunning = true;

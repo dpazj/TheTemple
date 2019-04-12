@@ -59,9 +59,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1439808475045820}
-  m_LocalRotation: {x: -0, y: 0.8388571, z: -0, w: 0.54435176}
-  m_LocalPosition: {x: 170.35, y: 18.68, z: -253.05}
-  m_LocalScale: {x: 0.7, y: 1, z: 0.7}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -40.9, y: 1, z: -33.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4783338731480072}
   m_Father: {fileID: 0}
@@ -285,7 +285,8 @@ MonoBehaviour:
   jumpAirControl: 0.4
   wallRunHeight: 2.5
   wallRunDistanceModifier: 12
-  wallJumpCoolDown: 0.5
+  wallJumpCoolDown: 0.3
+  wallJumpWithoutReset: 2
 --- !u!114 &114636936917444768
 MonoBehaviour:
   m_ObjectHideFlags: 1

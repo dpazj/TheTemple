@@ -29,9 +29,14 @@ public class MovementInfo : MonoBehaviour {
     public float wallRunHeight = 2.5f;
     public float wallRunDistanceModifier = 8f;
 
+    //Wall jump settings
     public float wallJumpCoolDown = 0.5f;
-    
+    public int wallJumpWithoutReset = 2;
+    [System.NonSerialized]
+    public int wallJumpCounter = 0;
 
+    private float fps; //REMOVE THIS 
+    private float deltaTime; //AND THIS
 
     //Observes these classes
     CapsuleCollider capsule;
@@ -44,11 +49,16 @@ public class MovementInfo : MonoBehaviour {
         cameraController = transform.Find("Camera").GetComponent<PlayerCamController>();
         wallRunning = false;
 	}
-	
-	// Update is called once per frame
-	void FixedUpdate () {
+
+
+    private void Update() //REMOVE THIS WITH FPS
+    {
+        deltaTime += (Time.deltaTime - deltaTime) * 0.1f;
+        fps = 1.0f / deltaTime;
+    }
+    // Update is called once per frame
+    void FixedUpdate () {
         CheckGrounded();
-        
 	}
 
     private void CheckGrounded()
@@ -58,7 +68,8 @@ public class MovementInfo : MonoBehaviour {
         if (Physics.SphereCast(transform.position, capsule.radius * (1.0f - 0.1f), Vector3.down, out hitInfo, ((capsule.height / 2f) - capsule.radius) + 0.1f, Physics.AllLayers, QueryTriggerInteraction.Ignore)) //Check if player is toutching ground
         {
             grounded = true;
-            jumping = false; 
+            jumping = false;
+            resetWallJumpCounter();
         }
         else
         {
@@ -66,6 +77,10 @@ public class MovementInfo : MonoBehaviour {
         }
     }
 
+    public void resetWallJumpCounter()
+    {
+        wallJumpCounter = 0;
+    }
 
     public void rotateCamera(float rot, float time)
     {
@@ -80,5 +95,6 @@ public class MovementInfo : MonoBehaviour {
         GUI.Label(new Rect(0, 10, 200, 100), "Straffe Velocity: " + straffeVelocity.ToString());
         GUI.Label(new Rect(0, 20, 100, 100), Input.GetAxis("Horizontal").ToString());
         GUI.Label(new Rect(0, 30, 100, 100), Input.GetAxis("Vertical").ToString());
+        GUI.Label(new Rect(0, 30, 100, 100), "Fps:" + fps );
     }
 }
