@@ -59,8 +59,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1439808475045820}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -40.9, y: 1, z: -33.2}
+  m_LocalRotation: {x: -0, y: 0.8388571, z: -0, w: 0.54435176}
+  m_LocalPosition: {x: -6.51, y: 35.5, z: -346.28}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4783338731480072}
@@ -277,12 +277,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fbdeabb027323d4fbb8de68502ec0ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  grounded: 0
   maxSpeed: 8
   walkSpeed: 4
   runModifier: 0.1
   walkModifier: 0.1
   jumpForce: 70
   jumpAirControl: 0.4
+  minJumpTime: 0.5
   wallRunHeight: 2.5
   wallRunDistanceModifier: 12
   wallJumpCoolDown: 0.3

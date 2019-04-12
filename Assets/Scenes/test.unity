@@ -1497,7 +1497,7 @@ Prefab:
     - target: {fileID: 54278482153182706, guid: 2a34d943edbca174c8a918669ad7e458,
         type: 2}
       propertyPath: m_IsKinematic
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 54278482153182706, guid: 2a34d943edbca174c8a918669ad7e458,
         type: 2}
