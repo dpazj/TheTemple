@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class MovementInfo : MonoBehaviour {
 
-    public float forwardVelocity { get;  set;}
-    public float straffeVelocity { get;  set; }
-    public bool grounded { get; private set;}
-    public bool wallRunning { get; set;}
-    public bool canWallRun { get;  set; }
+    [System.NonSerialized]
+    public float forwardVelocity;
+    [System.NonSerialized]
+    public float straffeVelocity;
+    public bool grounded;
+    [System.NonSerialized]
+    public bool wallRunning;
+    [System.NonSerialized]
+    public bool canWallRun;
     [System.NonSerialized]
     public bool jumping;
     [System.NonSerialized]
@@ -69,6 +73,7 @@ public class MovementInfo : MonoBehaviour {
         {
             grounded = true;
             jumping = false;
+            canWallRun = true;
             resetWallJumpCounter();
         }
         else
