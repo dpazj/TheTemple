@@ -19,16 +19,11 @@ public class WallJumpAbility : MonoBehaviour {
     }
 	
 	void Update () {
-        if(coolDown > 0)
-        {
-            coolDown -= Time.deltaTime;
-        }
-       
+              
 		if(Input.GetKeyDown(KeyCode.Space) && !wallJump && !movementInfo.grounded && (movementInfo.jumping || movementInfo.wallRunning)) //Player has to be jumping/wall running
         {
-            if(coolDown <= 0 && movementInfo.wallJumpCounter < movementInfo.wallJumpWithoutReset)
+            if(movementInfo.wallJumpCounter < movementInfo.wallJumpWithoutReset)
             {
-                Debug.Log(movementInfo.wallJumpCounter);
                 wallJump = true;
             }
             
@@ -38,39 +33,46 @@ public class WallJumpAbility : MonoBehaviour {
 
     private void FixedUpdate()
     {
-
+        if (coolDown > 0)
+        {
+            coolDown -= Time.deltaTime;
+            return;
+        }
+        
         if (wallJump)
         {
             if (movementInfo.wallRunning)
             {
                 if (Physics.Raycast(transform.position, transform.right, out rayhit, 0.7f) && rayhit.transform.tag == "Wall") //raycast right
                 {
-                    wallRunJump();
+                    wallRunJump(1);
                 }
                 else if(Physics.Raycast(transform.position, -transform.right, out rayhit, 0.7f) && rayhit.transform.tag == "Wall") //raycast left
                 {
-                    wallRunJump();
+                    wallRunJump(-1);
                 }
 
                 wallJump = false;
             }
-            
         }
     }
 
-    private void wallRunJump()
+    private void wallRunJump(int directionalMultiplier)
     {
-        movementInfo.canWallRun = movementInfo.wallRunning ? false : true;
+        Debug.Log("Attempt");
+        //Cancels wall run and then applies jump
+        movementInfo.mustSwapWallrunSide = true;
         movementInfo.rotateCamera(0, 0.4f);
         movementInfo.wallRunning = false;
+        movementInfo.canWallRun = true;
         rigidBody.useGravity = true;
-        applyForce(new Vector3(0f, 100f, 50f));
-        
+        applyForce(new Vector3(0f, 100f, 50f * directionalMultiplier));
+
     }
 
     private void applyForce(Vector3 force)
     {
-        rigidBody.velocity = Vector3.zero;//new Vector3(rigidBody.velocity.x, 0f, rigidBody.velocity.z);
+        rigidBody.velocity = Vector3.zero;
         rigidBody.AddForce(force, ForceMode.Impulse);
         coolDown = movementInfo.wallJumpCoolDown;
         movementInfo.wallJumpCounter++;

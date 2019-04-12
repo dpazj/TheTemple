@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,6 +13,9 @@ public class WallrunAbility : MonoBehaviour {
 
     private bool leftPress = false;
     private bool rightPress = false;
+
+    private enum LastWallSide { Right, Left};
+    private int lastSide;
 
     private readonly float wallrunDistanceModifier = 3.0f;
 
@@ -30,6 +34,9 @@ public class WallrunAbility : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+        
+
         if (Input.GetKey(KeyCode.Q))
         {
             leftPress = true;
@@ -49,6 +56,7 @@ public class WallrunAbility : MonoBehaviour {
 
     private void FixedUpdate()
     {
+        
         CheckWallRun();
     }
 
@@ -56,6 +64,11 @@ public class WallrunAbility : MonoBehaviour {
     {
         if (!movementInfo.canWallRun || movementInfo.forwardVelocity < (movementInfo.maxSpeed * 0.75)) {return; } //player must be at least at 75% of max speed to wall run
 
+        if (!CheckSideValid())
+        {
+            //cancelWallRun();
+            return;
+        }
 
         if (rightPress)
         {
@@ -63,7 +76,7 @@ public class WallrunAbility : MonoBehaviour {
         }
         else if (leftPress)
         {
-            WallRunExecute(-transform.right);
+            WallRunExecute(-transform.right); 
         }
         else
         {
@@ -71,6 +84,24 @@ public class WallrunAbility : MonoBehaviour {
         }
     }
 
+    private bool CheckSideValid()
+    {
+        if (movementInfo.mustSwapWallrunSide)
+        {
+            if((leftPress && lastSide == (int)LastWallSide.Left) || (rightPress && lastSide == (int)LastWallSide.Right))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        else
+        {
+            return true;
+        }
+    }
 
     private void WallRunExecute(Vector3 dir)
     {
@@ -97,6 +128,9 @@ public class WallrunAbility : MonoBehaviour {
 
     private void initWallRun()
     {
+        if (leftPress) { lastSide = (int)LastWallSide.Left; }
+        else if (rightPress){lastSide = (int)LastWallSide.Right;}
+        movementInfo.mustSwapWallrunSide = false;
         movementInfo.resetWallJumpCounter();
 
         //here we save the value of the speed starting the wall run to be used later
@@ -111,12 +145,12 @@ public class WallrunAbility : MonoBehaviour {
 
     private void continueWallRun()
     {
+        Debug.Log("Also this");
         rigidBody.velocity = Vector3.zero;
         //runs along a sine curve
         wallRunDistanceDone += wallrunSpeed * Time.deltaTime;
         float up = (movementInfo.wallRunHeight * Mathf.Sin(movementInfo.wallRunDistanceModifier * (wallRunDistanceDone / wallRunDistance)));
         transform.Translate(0, up * Time.deltaTime, 0);
-        
         if ((wallRunDistanceDone / wallRunDistance) > 0.45f) { cancelWallRun();}
 
     }
@@ -124,7 +158,6 @@ public class WallrunAbility : MonoBehaviour {
 
     private void cancelWallRun()
     {
-        
         movementInfo.canWallRun = movementInfo.wallRunning ? false : true;
         if (movementInfo.wallRunning) {normalCameraTilt();}
         movementInfo.wallRunning = false;

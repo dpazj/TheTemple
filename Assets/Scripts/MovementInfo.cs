@@ -35,9 +35,11 @@ public class MovementInfo : MonoBehaviour {
     //Wall run Settings
     public float wallRunHeight = 2.5f;
     public float wallRunDistanceModifier = 8f;
+    [System.NonSerialized]
+    public bool mustSwapWallrunSide;
 
     //Wall jump settings
-    public float wallJumpCoolDown = 0.5f;
+    public float wallJumpCoolDown = 0.3f;
     public int wallJumpWithoutReset = 2;
     [System.NonSerialized]
     public int wallJumpCounter = 0;
@@ -76,6 +78,7 @@ public class MovementInfo : MonoBehaviour {
         {
             grounded = true;
             jumping = false;
+            mustSwapWallrunSide = false;
             canWallRun = true;
             resetWallJumpCounter();
         }
@@ -103,6 +106,7 @@ public class MovementInfo : MonoBehaviour {
         GUI.Label(new Rect(0, 10, 200, 100), "Straffe Velocity: " + straffeVelocity.ToString());
         GUI.Label(new Rect(0, 20, 100, 100), Input.GetAxis("Horizontal").ToString());
         GUI.Label(new Rect(0, 30, 100, 100), Input.GetAxis("Vertical").ToString());
-        GUI.Label(new Rect(0, 30, 100, 100), "Fps:" + fps );
+        GUI.Label(new Rect(0, 40, 100, 100), "Fps:" + fps );
+        GUI.Label(new Rect(0, 50, 100, 100), "wall" + canWallRun.ToString());
     }
 }
