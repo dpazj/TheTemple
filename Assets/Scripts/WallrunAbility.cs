@@ -145,7 +145,6 @@ public class WallrunAbility : MonoBehaviour {
 
     private void continueWallRun()
     {
-        Debug.Log("Also this");
         rigidBody.velocity = Vector3.zero;
         //runs along a sine curve
         wallRunDistanceDone += wallrunSpeed * Time.deltaTime;
