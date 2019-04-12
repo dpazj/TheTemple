@@ -22,7 +22,6 @@ public class WallJumpAbility : MonoBehaviour {
               
 		if(Input.GetKeyDown(KeyCode.Space) && !wallJump) //Player has to be jumping/wall running
         {
-            Debug.Log(movementInfo.timeJumping);
             if(movementInfo.wallJumpCounter < movementInfo.wallJumpWithoutReset && movementInfo.timeJumping > movementInfo.minJumpTime)
             {
                 wallJump = true;

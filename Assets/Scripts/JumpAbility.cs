@@ -27,7 +27,6 @@ public class JumpAbility : MonoBehaviour {
         if (movementInfo.jumping)
         {
             movementInfo.timeJumping += Time.deltaTime;
-            
         }
 
         Jump();
@@ -36,10 +35,9 @@ public class JumpAbility : MonoBehaviour {
     private void Jump()
     {
         
-
-        if (movementInfo.grounded && jump)
+        if (movementInfo.grounded && jump && !movementInfo.jumping)
         {
-                Debug.Log("Jump" +  movementInfo.jumping.ToString());
+                
                 rigidBody.velocity = Vector3.zero;//new Vector3(rigidBody.velocity.x, 0f, rigidBody.velocity.z);
                 rigidBody.AddForce(new Vector3(0f, movementInfo.jumpForce, 0f), ForceMode.Impulse);
                 movementInfo.jumping = true;
