@@ -43,11 +43,11 @@ public class WallJumpAbility : MonoBehaviour {
         {
             if (movementInfo.wallRunning)
             {
-                if (Physics.Raycast(transform.position, transform.right, out rayhit, 1) && rayhit.transform.tag == "Wall") //raycast right
+                if (Physics.Raycast(transform.position, transform.right, out rayhit, 0.7f) && rayhit.transform.tag == "Wall") //raycast right
                 {
                     wallRunJump();
                 }
-                else if(Physics.Raycast(transform.position, -transform.right, out rayhit, 1) && rayhit.transform.tag == "Wall") //raycast left
+                else if(Physics.Raycast(transform.position, -transform.right, out rayhit, 0.7f) && rayhit.transform.tag == "Wall") //raycast left
                 {
                     wallRunJump();
                 }

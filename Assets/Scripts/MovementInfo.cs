@@ -17,8 +17,11 @@ public class MovementInfo : MonoBehaviour {
     public bool jumping;
     [System.NonSerialized]
     public bool forwardJump;
+    [System.NonSerialized]
+    public bool cameraFinishedRotating;
 
-    
+
+
     //Movement Settings
     public float maxSpeed = 8.0f;
     public float walkSpeed = 4.0f;

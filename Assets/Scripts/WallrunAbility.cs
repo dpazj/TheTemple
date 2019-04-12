@@ -19,6 +19,8 @@ public class WallrunAbility : MonoBehaviour {
     private float wallRunDistance;
     private float wallRunDistanceDone;
 
+    
+
     // Use this for initialization
     void Start () {
         movementInfo = GetComponent<MovementInfo>();
@@ -47,58 +49,44 @@ public class WallrunAbility : MonoBehaviour {
 
     private void FixedUpdate()
     {
-       
-        WallRun();
+        CheckWallRun();
     }
 
-    private void WallRun()
+    private void CheckWallRun()
     {
-        if (!movementInfo.canWallRun) {return; }
+        if (!movementInfo.canWallRun || movementInfo.forwardVelocity < (movementInfo.maxSpeed * 0.75)) {return; } //player must be at least at 75% of max speed to wall run
 
-        if (movementInfo.forwardVelocity < (movementInfo.maxSpeed * 0.75)) //player must be at least at 75% of max speed to wall run
-        {
-            return;
-        }
 
         if (rightPress)
         {
-            if (Physics.Raycast(transform.position, transform.right, out rcRight, 1.3f) && rcRight.transform.tag == "Wall") //if player is toutching wall and pressing correct key
-            {
-                if (!movementInfo.wallRunning) //now we need to check if player has been wall running already
-                {
-                    initWallRun(); //initialise wall run trajectory
-                    continueWallRun();
-                }
-                else
-                {
-                    continueWallRun();  //continue on trajectory
-                }
-            }
-            else
-            {
-                cancelWallRun();
-            }
+            WallRunExecute(transform.right);
         }
         else if (leftPress)
         {
-            if (Physics.Raycast(transform.position, -transform.right, out rcLeft, 1.3f) && rcLeft.transform.tag == "Wall") //if player is toutching wall and pressing correct key
+            WallRunExecute(-transform.right);
+        }
+        else
+        {
+            cancelWallRun();
+        }
+    }
+
+
+    private void WallRunExecute(Vector3 dir)
+    {
+        if (Physics.Raycast(transform.position, dir, out rcLeft, 1.3f) && rcLeft.transform.tag == "Wall") //if player is toutching wall and pressing correct key
+        {
+            //now we need to check if player has been wall running already
+            if (!movementInfo.wallRunning)
             {
-                //now we need to check if player has been wall running already
-                if (!movementInfo.wallRunning)
-                {
-                    //initialise wall run trajectory
-                    initWallRun();
-                    continueWallRun();
-                }
-                else
-                {
-                    //continue on trajectory
-                    continueWallRun();
-                }
+                //initialise wall run trajectory
+                initWallRun();
+                continueWallRun();
             }
             else
             {
-                cancelWallRun();
+                //continue on trajectory
+                continueWallRun();
             }
         }
         else
@@ -110,6 +98,7 @@ public class WallrunAbility : MonoBehaviour {
     private void initWallRun()
     {
         movementInfo.resetWallJumpCounter();
+
         //here we save the value of the speed starting the wall run to be used later
         wallrunSpeed = movementInfo.forwardVelocity;
         wallRunDistance = wallrunDistanceModifier * wallrunSpeed;
@@ -127,8 +116,9 @@ public class WallrunAbility : MonoBehaviour {
         wallRunDistanceDone += wallrunSpeed * Time.deltaTime;
         float up = (movementInfo.wallRunHeight * Mathf.Sin(movementInfo.wallRunDistanceModifier * (wallRunDistanceDone / wallRunDistance)));
         transform.Translate(0, up * Time.deltaTime, 0);
+        
+        if ((wallRunDistanceDone / wallRunDistance) > 0.45f) { cancelWallRun();}
 
-        if ((wallRunDistanceDone / wallRunDistance) >= 0.7) { cancelWallRun();}
     }
 
 

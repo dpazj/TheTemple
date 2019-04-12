@@ -21,7 +21,7 @@ public class PlayerCamController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         character = this.transform.parent.gameObject;
-        movementInfo = transform.parent.GetComponent<MovementInfo>();
+        
     }
 	
 	// Update is called once per frame
@@ -36,14 +36,8 @@ public class PlayerCamController : MonoBehaviour {
 
         transform.localRotation = Quaternion.AngleAxis(-mouseLook.y, Vector3.right);
         character.transform.localRotation = Quaternion.AngleAxis(mouseLook.x, character.transform.up);
-
         
         transform.Rotate(0, 0, rotation);
-
-        if(rotation == 0)
-        {
-            movementInfo.canWallRun = true;
-        }
 
     }
 
