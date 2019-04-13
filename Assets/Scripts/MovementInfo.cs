@@ -48,8 +48,6 @@ public class MovementInfo : MonoBehaviour {
     [System.NonSerialized]
     public int wallJumpCounter = 0;
 
-    private float fps; //REMOVE THIS 
-    private float deltaTime; //AND THIS
 
     //Observes these classes
     CapsuleCollider capsule;
@@ -62,13 +60,7 @@ public class MovementInfo : MonoBehaviour {
         cameraController = transform.Find("Camera").GetComponent<PlayerCamController>();
         wallRunning = false;
 	}
-
-
-    private void Update() //REMOVE THIS WITH FPS
-    {
-        deltaTime += (Time.deltaTime - deltaTime) * 0.1f;
-        fps = 1.0f / deltaTime;
-    }
+ 
     // Update is called once per frame
     void FixedUpdate () {
         CheckGrounded();
@@ -116,7 +108,6 @@ public class MovementInfo : MonoBehaviour {
         GUI.Label(new Rect(0, 10, 200, 100), "Straffe Velocity: " + straffeVelocity.ToString());
         GUI.Label(new Rect(0, 20, 100, 100), Input.GetAxis("Horizontal").ToString());
         GUI.Label(new Rect(0, 30, 100, 100), Input.GetAxis("Vertical").ToString());
-        GUI.Label(new Rect(0, 40, 100, 100), "Fps:" + fps );
-        
+
     }
 }
