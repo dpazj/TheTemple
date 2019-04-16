@@ -93,7 +93,7 @@ public class WallJumpAbility : MonoBehaviour {
         {
             
             Debug.DrawRay(hit.point, hit.normal, Color.red, 3f);
-            applyForce(new Vector3(0, 100f, 0));
+            applyForce(new Vector3(0, 90f, 0));
             wallJump = false;
         }
     }
