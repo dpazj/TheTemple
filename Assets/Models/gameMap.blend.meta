@@ -6,9 +6,11 @@ ModelImporter:
     100000: //RootNode
     100002: Ocean
     100004: WorldMap
+    100006: OceanPlus
     400000: //RootNode
     400002: Ocean
     400004: WorldMap
+    400006: OceanPlus
     2100000: Water_001
     2100002: Green
     2100004: LightDarkGreen
@@ -22,12 +24,16 @@ ModelImporter:
     2100020: Path
     2100022: DarkSand
     2100024: Sand
+    2100026: sea
     2300000: Ocean
     2300002: WorldMap
+    2300004: OceanPlus
     3300000: Ocean
     3300002: WorldMap
+    3300004: OceanPlus
     4300000: Ocean
     4300002: WorldMap
+    4300004: OceanPlus
     7400000: Default Take
     9500000: //RootNode
   externalObjects: {}
