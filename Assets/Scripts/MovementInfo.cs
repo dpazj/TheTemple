@@ -28,6 +28,8 @@ public class MovementInfo : MonoBehaviour {
     public float walkSpeed = 4.0f;
     public float runModifier = 0.1f;
     public float walkModifier = 0.1f;
+    [System.NonSerialized]
+    public bool canWalk = true;
 
     //Jump Settings
     public float jumpForce = 70.0f;
@@ -52,11 +54,13 @@ public class MovementInfo : MonoBehaviour {
     //Observes these classes
     CapsuleCollider capsule;
     PlayerCamController cameraController;
+    Rigidbody rb;
     
 
     // Use this for initialization
     void Start () {
         capsule = GetComponent<CapsuleCollider>();
+        rb = GetComponent<Rigidbody>();
         cameraController = transform.Find("Camera").GetComponent<PlayerCamController>();
         wallRunning = false;
 	}
@@ -72,6 +76,17 @@ public class MovementInfo : MonoBehaviour {
         RaycastHit hitInfo;
         if (Physics.SphereCast(transform.position, capsule.radius * (1.0f - 0.1f), Vector3.down, out hitInfo, ((capsule.height / 2f) - capsule.radius) + 0.1f, Physics.AllLayers, QueryTriggerInteraction.Ignore)) //Check if player is toutching ground
         {
+
+            if (Vector3.Dot(Vector3.up, hitInfo.normal) < 0.5f)
+            {
+                //transform.Translate();
+                canWalk = false;
+            }
+            else
+            {
+                canWalk = true;
+            }
+            rb.velocity = Vector3.zero;
             grounded = true;
             jumping = false;
             mustSwapWallrunSide = false;

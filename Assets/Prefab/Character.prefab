@@ -60,7 +60,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1865680428333862}
   m_LocalRotation: {x: -0, y: 0.8388571, z: -0, w: 0.54435176}
-  m_LocalPosition: {x: -136.40254, y: 149.68, z: 133.68933}
+  m_LocalPosition: {x: -128.13, y: 153.04, z: 144.19}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4942240808394726}
@@ -166,12 +166,12 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 10
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!81 &81614650891260240
 AudioListener:
   m_ObjectHideFlags: 1
@@ -309,7 +309,8 @@ MonoBehaviour:
   walkModifier: 0.1
   jumpForce: 70
   jumpAirControl: 0.4
-  minJumpTime: 0.2
+  minJumpTime: 0.15
+  jumpPreventionTime: 0.3
   wallRunHeight: 2.5
   wallRunDistanceModifier: 12
   wallJumpCoolDown: 0.3

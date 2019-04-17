@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -35,6 +36,8 @@ public class PlayerController : MonoBehaviour {
         Movement();
     }
 
+  
+
     private void Movement()
     {
         float h = Input.GetAxis("Horizontal");
@@ -60,6 +63,8 @@ public class PlayerController : MonoBehaviour {
 
         h *= Time.deltaTime;
         v *= Time.deltaTime;
+
+        
         transform.Translate(h * Mathf.Abs(movementInfo.straffeVelocity), 0, v * Mathf.Abs(movementInfo.forwardVelocity));
     }
 
@@ -68,61 +73,72 @@ public class PlayerController : MonoBehaviour {
 
     private void GetSpeed(float h, float v){
         if (!movementInfo.grounded) { return; }
-        bool run = Input.GetKey(KeyCode.LeftShift);
-
-        float forwardVelocity = movementInfo.forwardVelocity;
-        float straffeVelocity = movementInfo.straffeVelocity;
-
-        int forwardMultiplier = ((v >= 0) ? 1 : -1);
-        
-        forwardVelocity += forwardMultiplier * (run ? movementInfo.runModifier : movementInfo.walkModifier);
-        straffeVelocity += (run ? movementInfo.runModifier : movementInfo.walkModifier);
-
-        //Prevent player from going over speed forwards/backwards
-        if(forwardMultiplier == 1)
+        if (!movementInfo.canWalk)  //If player is trying to go up a hill, reduce their speed;
         {
-            //handles forwards
-            if (run && Mathf.Abs(forwardVelocity) > movementInfo.maxSpeed)
+            movementInfo.forwardVelocity -= 0.1f;
+            movementInfo.straffeVelocity -= 0.1f;
+            Debug.Log("Reduce Speed");
+        }else{
+
+
+            bool run = Input.GetKey(KeyCode.LeftShift);
+
+            float forwardVelocity = movementInfo.forwardVelocity;
+            float straffeVelocity = movementInfo.straffeVelocity;
+
+            int forwardMultiplier = ((v >= 0) ? 1 : -1);
+
+            forwardVelocity += forwardMultiplier * (run ? movementInfo.runModifier : movementInfo.walkModifier);
+            straffeVelocity += (run ? movementInfo.runModifier : movementInfo.walkModifier);
+
+            //Prevent player from going over speed forwards/backwards
+            if (forwardMultiplier == 1)
             {
-                forwardVelocity = movementInfo.maxSpeed;
-            }
-            else if (!run && Mathf.Abs(forwardVelocity) > movementInfo.walkSpeed)
-            {
-                forwardVelocity = forwardVelocity - 0.25f;
-                if (forwardVelocity < movementInfo.walkSpeed)
+                //handles forwards
+                if (run && Mathf.Abs(forwardVelocity) > movementInfo.maxSpeed)
                 {
-                    forwardVelocity = movementInfo.walkSpeed;
+                    forwardVelocity = movementInfo.maxSpeed;
+                }
+                else if (!run && Mathf.Abs(forwardVelocity) > movementInfo.walkSpeed)
+                {
+                    forwardVelocity = forwardVelocity - 0.25f;
+                    if (forwardVelocity < movementInfo.walkSpeed)
+                    {
+                        forwardVelocity = movementInfo.walkSpeed;
+                    }
                 }
             }
-        }
-        else
-        {
-            //handles backwards
-            if (run && forwardVelocity < (movementInfo.maxSpeed / 2*-1))
+            else
             {
-                forwardVelocity = forwardMultiplier * movementInfo.maxSpeed / 2;
+                //handles backwards
+                if (run && forwardVelocity < (movementInfo.maxSpeed / 2 * -1))
+                {
+                    forwardVelocity = forwardMultiplier * movementInfo.maxSpeed / 2;
+                }
+                else if (!run && forwardVelocity < (movementInfo.walkSpeed / 2 * -1))
+                {
+                    forwardVelocity = forwardMultiplier * movementInfo.walkSpeed / 2;
+                }
             }
-            else if (!run && forwardVelocity < (movementInfo.walkSpeed / 2 * -1))
+
+            //Prevent player from going over speed sideways
+            if (run && Mathf.Abs(straffeVelocity) > movementInfo.maxSpeed / 2)
             {
-                forwardVelocity = forwardMultiplier * movementInfo.walkSpeed / 2;
+                straffeVelocity = movementInfo.maxSpeed / 2;
             }
-        }
-        
-        //Prevent player from going over speed sideways
-        if (run && Mathf.Abs(straffeVelocity) > movementInfo.maxSpeed / 2)
-        {
-            straffeVelocity = movementInfo.maxSpeed / 2;
-        }
-        else if (!run && Mathf.Abs(straffeVelocity) > movementInfo.walkSpeed)
-        {
-            straffeVelocity = movementInfo.walkSpeed;
-        }
+            else if (!run && Mathf.Abs(straffeVelocity) > movementInfo.walkSpeed)
+            {
+                straffeVelocity = movementInfo.walkSpeed;
+            }
 
-        //smooths transition from moving forwards to backwards and vice versa
-        if (forwardMultiplier == -1 && forwardVelocity > 0) { forwardVelocity = -0.5f; }
-        if (forwardMultiplier == 1 && forwardVelocity < 0) { forwardVelocity = 0.5f; }
+            //smooths transition from moving forwards to backwards and vice versa
+            if (forwardMultiplier == -1 && forwardVelocity > 0) { forwardVelocity = -0.5f; }
+            if (forwardMultiplier == 1 && forwardVelocity < 0) { forwardVelocity = 0.5f; }
 
-        movementInfo.forwardVelocity = forwardVelocity;
-        movementInfo.straffeVelocity = straffeVelocity;
+
+
+            movementInfo.forwardVelocity = forwardVelocity;
+            movementInfo.straffeVelocity = straffeVelocity;
+        }
     }
 }
