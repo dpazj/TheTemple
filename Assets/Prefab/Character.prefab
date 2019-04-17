@@ -307,10 +307,10 @@ MonoBehaviour:
   walkSpeed: 4
   runModifier: 0.1
   walkModifier: 0.1
+  climbableSteepness: 0.5
   jumpForce: 70
   jumpAirControl: 0.4
   minJumpTime: 0.15
-  jumpPreventionTime: 0.3
   wallRunHeight: 2.5
   wallRunDistanceModifier: 12
   wallJumpCoolDown: 0.3
