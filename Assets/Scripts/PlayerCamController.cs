@@ -34,6 +34,14 @@ public class PlayerCamController : MonoBehaviour {
 
         mouseLook += smoothV;
 
+        Debug.Log(mouseLook.y);
+        if(mouseLook.y > 80f)
+        {
+            mouseLook.y = 80f;
+        }else if(mouseLook.y < -60f)
+        {
+            mouseLook.y = -60f;
+        }
         transform.localRotation = Quaternion.AngleAxis(-mouseLook.y, Vector3.right);
         character.transform.localRotation = Quaternion.AngleAxis(mouseLook.x, character.transform.up);
         
