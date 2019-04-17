@@ -28,6 +28,7 @@ public class MovementInfo : MonoBehaviour {
     public float walkSpeed = 4.0f;
     public float runModifier = 0.1f;
     public float walkModifier = 0.1f;
+    public float climbableSteepness = 0.5f;
     [System.NonSerialized]
     public bool canWalk = true;
 
@@ -77,7 +78,7 @@ public class MovementInfo : MonoBehaviour {
         if (Physics.SphereCast(transform.position, capsule.radius * (1.0f - 0.1f), Vector3.down, out hitInfo, ((capsule.height / 2f) - capsule.radius) + 0.1f, Physics.AllLayers, QueryTriggerInteraction.Ignore)) //Check if player is toutching ground
         {
 
-            if (Vector3.Dot(Vector3.up, hitInfo.normal) < 0.5f)
+            if (Vector3.Dot(Vector3.up, hitInfo.normal) < climbableSteepness)
             {
                 //transform.Translate();
                 canWalk = false;
