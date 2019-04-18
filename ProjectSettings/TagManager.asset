@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Wall
+  - Ocean
   layers:
   - Default
   - TransparentFX

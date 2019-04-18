@@ -60,7 +60,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1865680428333862}
   m_LocalRotation: {x: -0, y: 0.8388571, z: -0, w: 0.54435176}
-  m_LocalPosition: {x: -128.13, y: 153.04, z: 144.19}
+  m_LocalPosition: {x: -472.1825, y: 135.97, z: -173.07883}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4942240808394726}
@@ -73,7 +73,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1673191894122868}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.41937324, y: 0, z: 0, w: 0.9078139}
   m_LocalPosition: {x: 0, y: 0.59, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -170,7 +170,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 1
 --- !u!81 &81614650891260240
 AudioListener:
@@ -272,7 +272,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1673191894122868}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
   m_Name: 
@@ -302,7 +302,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fbdeabb027323d4fbb8de68502ec0ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grounded: 0
   maxSpeed: 8
   walkSpeed: 4
   runModifier: 0.1
@@ -330,6 +329,7 @@ MonoBehaviour:
   canJump: 1
   canWallrun: 1
   canWallJump: 1
+  waterKills: 1
 --- !u!124 &124712008157144088
 Behaviour:
   m_ObjectHideFlags: 1
