@@ -6,6 +6,6 @@ public class IslandManager : LevelManager {
 
 	public new void test()
     {
-        Debug.Log("HIHIHI");
+        Debug.Log("Island Manager");
     }
 }

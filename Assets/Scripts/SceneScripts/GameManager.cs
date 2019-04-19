@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour {
     private bool postProcessing = true;
 
     LevelManager currentLevelManager;
+    IslandManager islandManager;
     string currentSceneName;
 
     public static GameManager instance = null;
@@ -73,6 +74,9 @@ public class GameManager : MonoBehaviour {
 
         currentLevelManager = GameObject.Find(currentSceneName + "Manager").GetComponent<LevelManager>();
         currentLevelManager.spawnPlayer(true);
+        currentLevelManager.test();
+        islandManager = (IslandManager)currentLevelManager;
+        islandManager.test();
 
     }
 

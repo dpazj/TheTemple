@@ -30,7 +30,7 @@ public class LevelManager : MonoBehaviour {
 
     public void test()
     {
-        Debug.Log("aa");
+        Debug.Log("levelmanager");
     }
 
     private void levelComplete()
