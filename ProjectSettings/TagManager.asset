@@ -10,6 +10,7 @@ TagManager:
   - TutorialFloor
   - SectionComplete
   - LevelComplete
+  - Gem
   layers:
   - Default
   - TransparentFX

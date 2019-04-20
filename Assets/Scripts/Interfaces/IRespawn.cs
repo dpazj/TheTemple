@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IRespawn{
-
-    
-    Vector3[] respawnPoints { get; set;}
+public interface IRespawn
+{
+    Vector3[] respawnPoints { get; set; }
     void respawn();
     void getRespawnPoints();
 }
+
+
+
