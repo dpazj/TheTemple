@@ -39,17 +39,19 @@ public class WallrunAbility : MonoBehaviour {
 
         if (Input.GetKey(KeyCode.Q))
         {
+            movementInfo.attemptingWallrun = true;
             leftPress = true;
             rightPress = false;
         }
         else if (Input.GetKey(KeyCode.E))
         {
+            movementInfo.attemptingWallrun = true;
             leftPress = false;
             rightPress = true;
         }
         else
         {
-            leftPress = rightPress = false;
+            movementInfo.attemptingWallrun = leftPress = rightPress = false;
         }
     }
 

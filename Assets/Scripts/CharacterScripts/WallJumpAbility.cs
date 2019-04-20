@@ -89,7 +89,7 @@ public class WallJumpAbility : MonoBehaviour {
         
         ContactPoint hit = collision.contacts[0];
 
-        if (wallJump && hit.normal.y < 0.1f && movementInfo.timeJumping > movementInfo.minJumpTime) //so that player doesnt instantly launch off things
+        if (wallJump && hit.normal.y < 0.1f && movementInfo.timeJumping > movementInfo.minJumpTime && !movementInfo.attemptingWallrun) //so that player doesnt instantly launch off things or jump if they are trying to wallrun
         {
             applyForce(new Vector3(0, 90f, 0));
             wallJump = false;

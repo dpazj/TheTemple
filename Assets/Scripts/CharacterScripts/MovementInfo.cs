@@ -45,7 +45,8 @@ public class MovementInfo : MonoBehaviour {
     public float wallRunDistanceModifier = 8f;
     [System.NonSerialized]
     public bool mustSwapWallrunSide;
-
+    [System.NonSerialized]
+    public bool attemptingWallrun;
     //Wall jump settings
     public float wallJumpCoolDown = 0.3f;
     public int wallJumpWithoutReset = 2;
