@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Wall
   - Ocean
+  - LightUp
+  - TutorialFloor
+  - SectionComplete
   layers:
   - Default
   - TransparentFX

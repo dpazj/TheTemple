@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : MonoBehaviour, IObserver {
 
     [SerializeField]
     private string menuScene;
@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour {
         postProcessing = val;
         //TODO enable character post processing
     }
+
     public bool getPostProcessing() { return this.postProcessing; }
 
     public void loadScene(string scene)
@@ -74,9 +75,7 @@ public class GameManager : MonoBehaviour {
 
         currentLevelManager = GameObject.Find(currentSceneName + "Manager").GetComponent<LevelManager>();
         currentLevelManager.spawnPlayer(true);
-        currentLevelManager.test();
-        islandManager = (IslandManager)currentLevelManager;
-        islandManager.test();
+        
 
     }
 
@@ -94,4 +93,15 @@ public class GameManager : MonoBehaviour {
 
         finishSceneCreation();
     }
+
+    public void Notify<T>(T t)
+    {
+        T t1 = (T)(object)t;
+        string scene = (string)(object)t1;
+        loadScene(scene);
+
+
+    }
+
+   
 }

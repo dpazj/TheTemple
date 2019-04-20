@@ -5,37 +5,34 @@ using UnityEngine.PostProcessing;
 
 public class LevelManager : MonoBehaviour {
 
-    public event System.Action CompleteNotify;
-
-    GameObject character;
+    IObserver gameManager;
     GameObject gameMap;
+    public GameObject character { get; protected set; }
+    public Vector3[] respawnPoints { get; protected set; }
+    public Vector3 spawn { get; protected set; }
 
     private void Awake()
     {
         character = GameObject.Find("Character");
         gameMap = GameObject.Find("GameMap");
+        spawn = gameMap.GetComponent<RespawnPoints>().spawn;
+        respawnPoints = gameMap.GetComponent<RespawnPoints>().respawnPoints;
     }
 
     public void spawnPlayer(bool postProActive)
     {
         
-        character.transform.position = gameMap.GetComponent<RespawnPoints>().spawn;
+        character.transform.position = spawn;
         setPostProcessing(postProActive);
     }
 
     public void setPostProcessing(bool active)
     {
         character.transform.Find("Camera").GetComponent<PostProcessingBehaviour>().enabled = active; 
-    }
+    }  
 
-    public void test()
+    public void complete()
     {
-        Debug.Log("levelmanager");
+        gameManager.Notify("Island");
     }
-
-    private void levelComplete()
-    {
-        if (this.CompleteNotify != null) this.CompleteNotify();
-    }
-    
 }

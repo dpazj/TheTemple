@@ -111,13 +111,13 @@ public class PlayerController : MonoBehaviour {
             else
             {
                 //handles backwards
-                if (run && forwardVelocity < (movementInfo.maxSpeed / 2 * -1))
+                if (run && forwardVelocity < (movementInfo.maxSpeed * -1))
                 {
-                    forwardVelocity = forwardMultiplier * movementInfo.maxSpeed / 2;
+                    forwardVelocity = forwardMultiplier * movementInfo.maxSpeed;
                 }
-                else if (!run && forwardVelocity < (movementInfo.walkSpeed / 2 * -1))
+                else if (!run && forwardVelocity < (movementInfo.walkSpeed * -1))
                 {
-                    forwardVelocity = forwardMultiplier * movementInfo.walkSpeed / 2;
+                    forwardVelocity = forwardMultiplier * movementInfo.walkSpeed;
                 }
             }
 
