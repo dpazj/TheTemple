@@ -81,7 +81,6 @@ public class MovementInfo : MonoBehaviour {
 
             if (Vector3.Dot(Vector3.up, hitInfo.normal) < climbableSteepness)
             {
-                //transform.Translate();
                 canWalk = false;
             }
             else

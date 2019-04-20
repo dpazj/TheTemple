@@ -277,7 +277,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4201911540680406, guid: 2d3b007562912474f93dd050846d89cf, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 132.64284
+      value: 135.99
       objectReference: {fileID: 0}
     - target: {fileID: 4201911540680406, guid: 2d3b007562912474f93dd050846d89cf, type: 2}
       propertyPath: m_LocalPosition.z
@@ -302,25 +302,6 @@ Prefab:
     - target: {fileID: 4201911540680406, guid: 2d3b007562912474f93dd050846d89cf, type: 2}
       propertyPath: m_RootOrder
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 20863913545323730, guid: 2d3b007562912474f93dd050846d89cf,
-        type: 2}
-      propertyPath: far clip plane
-      value: 800
-      objectReference: {fileID: 0}
-    - target: {fileID: 4942240808394726, guid: 2d3b007562912474f93dd050846d89cf, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 114565834462573792, guid: 2d3b007562912474f93dd050846d89cf,
-        type: 2}
-      propertyPath: waterKills
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114565834462573792, guid: 2d3b007562912474f93dd050846d89cf,
-        type: 2}
-      propertyPath: tutorialBehaviour
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2d3b007562912474f93dd050846d89cf, type: 2}

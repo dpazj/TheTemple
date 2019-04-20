@@ -19,7 +19,6 @@ public class TutorialManager : LevelManager, IObserver {
 
     private void Start()
     {
-        Debug.Log("Stage:" + stage);
         base.character.GetComponent<TutorialBehaviour>().setObserver(this);
     }
 
@@ -136,26 +135,6 @@ public class TutorialManager : LevelManager, IObserver {
     }
    
 
-    public void Notify(Collision collision)
-    {
-        if(collision.gameObject.tag == "LightUp")
-        {
-            updateColor(collision.gameObject.transform, completeMaterial);
-        }
-        else if(collision.gameObject.tag == "TutorialFloor")
-        {
-            respawn();
-        }
-        else if(collision.gameObject.tag == "SectionComplete")
-        {
-            stageComplete();
-        }
-        else if(collision.gameObject.tag == "Wall")
-        {
-            updateColor(collision.gameObject.transform, completeMaterial);
-        }
-    }
-
     private void respawn()
     {
         base.character.transform.position = base.respawnPoints[stage];
@@ -163,20 +142,12 @@ public class TutorialManager : LevelManager, IObserver {
         {
             updateChildColor(uncompleteMaterial);
         }
-        
-        //Show tip again
-    }
-
-    private IEnumerator loadMainGame()
-    {
-        yield return new WaitForSeconds(4); 
-        
     }
 
     public void Notify<T>(T t)
     {
         T t1 = (T)(object)t;
-        Collision collision = (Collision) (object) t1; 
+        Collision collision = (Collision)(object)t1;
 
         if (collision.gameObject.tag == "LightUp")
         {
@@ -195,4 +166,11 @@ public class TutorialManager : LevelManager, IObserver {
             updateColor(collision.gameObject.transform, completeMaterial);
         }
     }
+
+    private IEnumerator loadMainGame()
+    {
+        yield return new WaitForSeconds(4);
+        base.complete();
+    }
+
 }

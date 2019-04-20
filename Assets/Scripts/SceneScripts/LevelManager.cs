@@ -29,10 +29,17 @@ public class LevelManager : MonoBehaviour {
     public void setPostProcessing(bool active)
     {
         character.transform.Find("Camera").GetComponent<PostProcessingBehaviour>().enabled = active; 
-    }  
+    }
 
     public void complete()
     {
         gameManager.Notify("Island");
     }
+
+    public void setObserver(IObserver cb)
+    {
+        gameManager = cb;
+    }
+
+    
 }

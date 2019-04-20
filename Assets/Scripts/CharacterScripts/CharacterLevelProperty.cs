@@ -11,18 +11,17 @@ public class CharacterLevelProperty : MonoBehaviour {
     private bool tutorialBehaviour;
 
 
-    WaterDeathBehaviour waterDeathBehaviour;
-    TutorialBehaviour tb;
+    /*WaterDeathBehaviour waterDeathBehaviour;
+    TutorialBehaviour tb;*/
     private void Start()
     {
         if (waterKills)
         {
-            waterDeathBehaviour = gameObject.AddComponent(typeof(WaterDeathBehaviour)) as WaterDeathBehaviour;
+            gameObject.AddComponent(typeof(WaterDeathBehaviour));
         }
-
         if (tutorialBehaviour)
         {
-            tb = gameObject.AddComponent(typeof(TutorialBehaviour)) as TutorialBehaviour;
+            gameObject.AddComponent(typeof(TutorialBehaviour));
         }
     }
 }

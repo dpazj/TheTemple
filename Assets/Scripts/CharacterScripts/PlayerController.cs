@@ -77,8 +77,9 @@ public class PlayerController : MonoBehaviour {
         {
             movementInfo.forwardVelocity -= 0.1f;
             movementInfo.straffeVelocity -= 0.1f;
-            Debug.Log("Reduce Speed");
-        }else{
+        }
+        else
+        {
 
 
             bool run = Input.GetKey(KeyCode.LeftShift);

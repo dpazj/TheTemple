@@ -23,7 +23,6 @@ public class GameManager : MonoBehaviour, IObserver {
     private bool postProcessing = true;
 
     LevelManager currentLevelManager;
-    IslandManager islandManager;
     string currentSceneName;
 
     public static GameManager instance = null;
@@ -63,6 +62,11 @@ public class GameManager : MonoBehaviour, IObserver {
             StartCoroutine(LoadScene(islandScene));
             currentSceneName = islandScene;
         }
+        else if (scene.Equals(tutorialScene))
+        {
+            StartCoroutine(LoadScene(tutorialScene));
+            currentSceneName = tutorialScene;
+        }
         else
         {
             Debug.Log("Wrong Scene Name");
@@ -72,11 +76,9 @@ public class GameManager : MonoBehaviour, IObserver {
 
     private void finishSceneCreation()
     {
-
         currentLevelManager = GameObject.Find(currentSceneName + "Manager").GetComponent<LevelManager>();
         currentLevelManager.spawnPlayer(true);
-        
-
+        currentLevelManager.setObserver(this);
     }
 
     IEnumerator LoadScene(string scene)
@@ -99,8 +101,6 @@ public class GameManager : MonoBehaviour, IObserver {
         T t1 = (T)(object)t;
         string scene = (string)(object)t1;
         loadScene(scene);
-
-
     }
 
    
