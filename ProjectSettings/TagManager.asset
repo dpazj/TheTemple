@@ -9,6 +9,7 @@ TagManager:
   - LightUp
   - TutorialFloor
   - SectionComplete
+  - LevelComplete
   layers:
   - Default
   - TransparentFX

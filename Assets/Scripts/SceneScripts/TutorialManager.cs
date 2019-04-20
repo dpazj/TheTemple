@@ -5,11 +5,13 @@ using UnityEngine;
 
 public class TutorialManager : LevelManager, IObserver {
 
-
+    public GameObject tutorialMessages;
     public Material completeMaterial;
     public Material uncompleteMaterial;
     public GameObject[] stages;
+    
     private int stage = 0;
+    private TutorialPopupControl tutorialPopup;
 
 
     //Movement
@@ -19,7 +21,10 @@ public class TutorialManager : LevelManager, IObserver {
 
     private void Start()
     {
+        
+        tutorialPopup = Instantiate(tutorialMessages).GetComponent<TutorialPopupControl>();
         base.character.GetComponent<TutorialBehaviour>().setObserver(this);
+        stageControl();
     }
 
     void Update()
@@ -35,34 +40,34 @@ public class TutorialManager : LevelManager, IObserver {
         switch (stage)
         {
             case 0:
-                //TODO show info
+                tutorialPopup.createPopup("Use WASD to move");
                 break;
             case 1:
-                //Show jump info
+                tutorialPopup.changePopup("Use SPACE to jump");
                 break;
             case 2:
-                //Show momentum info (hold shift to sprint)
+                tutorialPopup.changePopup("Use SHIFT to sprint. You may need to have a run up to build enough momentum!");
                 break;
             case 3:
-                //Show straffe jump info
+                tutorialPopup.changePopup("Use the mouse to change direction mid jump. You may need to get some speed up for this one");
                 break;
             case 4:
-                //Show right wall run info
+                tutorialPopup.changePopup("Hold E to wall run on the right");
                 break;
             case 5:
-                //Show left wall run info
+                tutorialPopup.changePopup("Hold Q to wall run on the left");
                 break;
             case 6:
-                //Wallrun round corner
+                tutorialPopup.changePopup("You can wall run round corners!");
                 break;
             case 7:
-                //Walljump info
+                tutorialPopup.changePopup("While jumping and toutching a wall, press space and move the mouse in the direction you wish to wall jump to");
                 break;
             case 8:
-                //Wallrun + wall jump;
+                tutorialPopup.changePopup("While wall running, press space to launch yourself off the wall");
                 break;
             case 9:
-                //winner winner chicken dinner!!
+                tutorialPopup.changePopup("Tutorial Complete");
                 stage++;
                 StartCoroutine(loadMainGame());
                 break;
@@ -100,7 +105,6 @@ public class TutorialManager : LevelManager, IObserver {
         
         stage++;
         stageControl();
-
     }
 
     private void loadNext()
@@ -146,6 +150,7 @@ public class TutorialManager : LevelManager, IObserver {
 
     public void Notify<T>(T t)
     {
+        if(stage > stages.Length) { return; }
         T t1 = (T)(object)t;
         Collision collision = (Collision)(object)t1;
 

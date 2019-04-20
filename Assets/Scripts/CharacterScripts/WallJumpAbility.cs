@@ -22,7 +22,8 @@ public class WallJumpAbility : MonoBehaviour {
               
 		if(Input.GetKeyDown(KeyCode.Space) && !wallJump) //Player has to be jumping/wall running
         {
-            if(movementInfo.wallJumpCounter < movementInfo.wallJumpWithoutReset && movementInfo.timeJumping > movementInfo.minJumpTime)
+            Debug.Log(movementInfo.timeJumping > movementInfo.minJumpTime);
+            if (movementInfo.wallJumpCounter < movementInfo.wallJumpWithoutReset)
             {
                 wallJump = true;
             }
@@ -39,8 +40,9 @@ public class WallJumpAbility : MonoBehaviour {
             return;
         }
         
-        if (wallJump && !movementInfo.grounded && (movementInfo.jumping || movementInfo.wallRunning))
+        if (wallJump && !movementInfo.grounded &&  movementInfo.wallRunning)
         {
+            
             if (movementInfo.wallRunning)
             {
                 if (Physics.Raycast(transform.position, transform.right, out rayhit, 0.7f) && rayhit.transform.tag == "Wall") //raycast right
@@ -84,9 +86,10 @@ public class WallJumpAbility : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
+        
         ContactPoint hit = collision.contacts[0];
 
-        if (wallJump && hit.normal.y < 0.1f)
+        if (wallJump && hit.normal.y < 0.1f && movementInfo.timeJumping > movementInfo.minJumpTime) //so that player doesnt instantly launch off things
         {
             applyForce(new Vector3(0, 90f, 0));
             wallJump = false;
