@@ -68,7 +68,6 @@ public class TutorialManager : LevelManager, IObserver {
                 break;
             case 9:
                 tutorialPopup.changePopup("Tutorial Complete");
-                stage++;
                 StartCoroutine(loadMainGame());
                 break;
         }
@@ -97,12 +96,7 @@ public class TutorialManager : LevelManager, IObserver {
         {
             loadNext();
         }
-        else
-        {
-            Debug.Log("COMPLETE");
-        }
-
-        
+                
         stage++;
         stageControl();
     }
@@ -150,7 +144,7 @@ public class TutorialManager : LevelManager, IObserver {
 
     public void Notify<T>(T t)
     {
-        if(stage > stages.Length) { return; }
+        
         T t1 = (T)(object)t;
         Collision collision = (Collision)(object)t1;
 

@@ -8,7 +8,6 @@ public class WallJumpAbility : MonoBehaviour {
     private Rigidbody rigidBody;
 
     private float coolDown = 0f;
-    private bool wallJump = false;
 
     private RaycastHit rayhit;
 
@@ -20,12 +19,11 @@ public class WallJumpAbility : MonoBehaviour {
 	
 	void Update () {
               
-		if(Input.GetKeyDown(KeyCode.Space) && !wallJump) //Player has to be jumping/wall running
+		if(Input.GetKeyDown(KeyCode.Space) && !movementInfo.wallJump) //Player has to be jumping/wall running
         {
-            Debug.Log(movementInfo.timeJumping > movementInfo.minJumpTime);
             if (movementInfo.wallJumpCounter < movementInfo.wallJumpWithoutReset)
             {
-                wallJump = true;
+                movementInfo.wallJump = true;
             }
             
         }
@@ -40,7 +38,7 @@ public class WallJumpAbility : MonoBehaviour {
             return;
         }
         
-        if (wallJump && !movementInfo.grounded &&  movementInfo.wallRunning)
+        if (movementInfo.wallJump && !movementInfo.grounded &&  movementInfo.wallRunning)
         {
             
             if (movementInfo.wallRunning)
@@ -54,7 +52,7 @@ public class WallJumpAbility : MonoBehaviour {
                     wallRunJump(1);
                 }
 
-                wallJump = false;
+                movementInfo.wallJump = false;
             }
         }
     }
@@ -89,10 +87,10 @@ public class WallJumpAbility : MonoBehaviour {
         
         ContactPoint hit = collision.contacts[0];
 
-        if (wallJump && hit.normal.y < 0.1f && movementInfo.timeJumping > movementInfo.minJumpTime && !movementInfo.attemptingWallrun) //so that player doesnt instantly launch off things or jump if they are trying to wallrun
+        if (movementInfo.wallJump && hit.normal.y < 0.1f && movementInfo.timeJumping > movementInfo.minJumpTime && !movementInfo.attemptingWallrun) //so that player doesnt instantly launch off things or jump if they are trying to wallrun
         {
             applyForce(new Vector3(0, 90f, 0));
-            wallJump = false;
+            movementInfo.wallJump = false;
         }
     }
 

@@ -6,9 +6,7 @@ using System;
 
 public class TutorialPopupControl : MonoBehaviour {
 
-    TextMeshProUGUI textMesh;
-    bool popup = false;
-    
+    TextMeshProUGUI textMesh;   
 	
 	void Awake () {
         textMesh = transform.Find("Text").GetComponent<TextMeshProUGUI>();

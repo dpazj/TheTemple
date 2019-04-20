@@ -134,7 +134,6 @@ public class WallrunAbility : MonoBehaviour {
         else if (rightPress){lastSide = (int)LastWallSide.Right;}
         movementInfo.mustSwapWallrunSide = false;
         movementInfo.resetWallJumpCounter();
-
         //here we save the value of the speed starting the wall run to be used later
         wallrunSpeed = movementInfo.forwardVelocity;
         wallRunDistance = wallrunDistanceModifier * wallrunSpeed;
@@ -175,7 +174,6 @@ public class WallrunAbility : MonoBehaviour {
         {
             movementInfo.rotateCamera(-15, 0.5f);
         }
-
     }
 
     private void normalCameraTilt()

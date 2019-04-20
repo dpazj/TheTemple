@@ -33,6 +33,7 @@ public class LevelManager : MonoBehaviour {
 
     public void complete()
     {
+        if(gameManager == null) { Debug.Log("No GameManager in scene"); return;}
         gameManager.Notify("Island");
     }
 

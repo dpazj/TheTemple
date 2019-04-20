@@ -47,11 +47,14 @@ public class MovementInfo : MonoBehaviour {
     public bool mustSwapWallrunSide;
     [System.NonSerialized]
     public bool attemptingWallrun;
+
     //Wall jump settings
     public float wallJumpCoolDown = 0.3f;
     public int wallJumpWithoutReset = 2;
     [System.NonSerialized]
     public int wallJumpCounter = 0;
+    [System.NonSerialized]
+    public bool wallJump = false;
 
 
     //Observes these classes
@@ -92,6 +95,7 @@ public class MovementInfo : MonoBehaviour {
             grounded = true;
             jumping = false;
             mustSwapWallrunSide = false;
+            wallJump = false;
             canWallRun = true;
             resetCounters();
         }
@@ -119,10 +123,14 @@ public class MovementInfo : MonoBehaviour {
 
     public void zeroValues()
     {
-        rb.velocity = Vector3.zero;
+        zeroVelocity();
         forwardVelocity = 0;
         straffeVelocity = 0;
+    }
 
+    public void zeroVelocity()
+    {
+        rb.velocity = Vector3.zero;
     }
     
 
