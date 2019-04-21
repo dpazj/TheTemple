@@ -30,6 +30,7 @@ public class MovementInfo : MonoBehaviour {
     public float runModifier = 0.1f;
     public float walkModifier = 0.1f;
     public float climbableSteepness = 0.5f;
+    public float steepSpeedReduction = 0.1f;
     [System.NonSerialized]
     public bool canWalk = true;
 

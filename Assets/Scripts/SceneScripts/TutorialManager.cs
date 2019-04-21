@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class TutorialManager : LevelManager, IObserver {
 
+    public GameObject blindingLight;
     public GameObject tutorialMessages;
+    public GameObject gem;
     public Material completeMaterial;
     public Material uncompleteMaterial;
     public GameObject[] stages;
@@ -22,7 +24,10 @@ public class TutorialManager : LevelManager, IObserver {
     private void Start()
     {
         tutorialPopup = Instantiate(tutorialMessages).GetComponent<TutorialPopupControl>();
+        
+
         character.GetComponent<CollisionNotifier>().setObserver(this);
+        gem.GetComponent<TutorialGem>().setObserver(this);
         stageControl();
     }
 
@@ -66,8 +71,11 @@ public class TutorialManager : LevelManager, IObserver {
                 tutorialPopup.changePopup("While wall running, press space to launch yourself off the wall");
                 break;
             case 9:
-                tutorialPopup.changePopup("Tutorial Complete");
+                tutorialPopup.changePopup("Collect the gem!");
+                break;
+            case 10:
                 StartCoroutine(loadMainGame());
+                tutorialPopup.changePopup("Tutorial Complete!");
                 break;
         }
     }
@@ -143,30 +151,51 @@ public class TutorialManager : LevelManager, IObserver {
 
     public void Notify<T>(T t)
     {
-        
-        T t1 = (T)(object)t;
-        Collision collision = (Collision)(object)t1;
 
-        if (collision.gameObject.tag == "LightUp")
+
+        object t1 = (object)t;
+        if(t1.GetType() == typeof(string))
         {
-            updateColor(collision.gameObject.transform, completeMaterial);
+            string message = (string)t1;
+            if(message == "GemCollected")
+            {
+                stageComplete();
+            }
         }
-        else if (collision.gameObject.tag == "TutorialFloor")
+        else
         {
-            respawn();
+            Collision collision = (Collision)(object)t1;
+
+            if (collision.gameObject.tag == "LightUp")
+            {
+                updateColor(collision.gameObject.transform, completeMaterial);
+            }
+            else if (collision.gameObject.tag == "TutorialFloor")
+            {
+                respawn();
+            }
+            else if (collision.gameObject.tag == "SectionComplete")
+            {
+                stageComplete();
+            }
+            else if (collision.gameObject.tag == "Wall")
+            {
+                updateColor(collision.gameObject.transform, completeMaterial);
+            }
         }
-        else if (collision.gameObject.tag == "SectionComplete")
-        {
-            stageComplete();
-        }
-        else if (collision.gameObject.tag == "Wall")
-        {
-            updateColor(collision.gameObject.transform, completeMaterial);
-        }
+
+        
+        
+        
     }
 
     private IEnumerator loadMainGame()
     {
+
+        yield return new WaitForSeconds(1.5f);
+        tutorialPopup.createPopup("");
+        BlinderController blind = Instantiate(blindingLight).GetComponent<BlinderController>();
+        blind.setBright(true, 2f);
         yield return new WaitForSeconds(4);
         complete("Island");
     }

@@ -7,13 +7,22 @@ public class BlinderController : MonoBehaviour {
 
     Image imgLight;
 
-    void Start()
+    void Awake()
     {
-        imgLight = transform.GetChild(0).GetComponent<Image>();
+        imgLight = transform.Find("LightSource").GetComponent<Image>();
     }
 
     public void setBright(bool bright, float time)
     {
+        if(time == 0)
+        {
+            float desired = 0;
+            if (bright)
+            {
+                desired = 1f;
+            }
+            changeAlpha(desired);
+        }
         StartCoroutine(lightUpScreen(bright, time));
     }
 

@@ -11,6 +11,7 @@ TagManager:
   - SectionComplete
   - LevelComplete
   - Gem
+  - GemShard
   layers:
   - Default
   - TransparentFX

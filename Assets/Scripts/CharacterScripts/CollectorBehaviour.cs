@@ -7,7 +7,7 @@ public class CollectorBehaviour : MonoBehaviour {
     private void OnCollisionEnter(Collision collision)
     {
         string tag = collision.gameObject.tag;
-        if (tag == "Gem" || tag == "GemTrail")
+        if (collision.gameObject.GetComponent<ICollectable>() != null)
         {
             collision.gameObject.GetComponent<ICollectable>().collect();
         }

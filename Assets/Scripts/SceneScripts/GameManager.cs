@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour, IObserver {
     [SerializeField]
     private string finalLevelScene;
     [SerializeField]
-    GameObject loadingBar;
+    GameObject loaderBar;
 
 
     private int qualityLevel;
@@ -37,6 +37,19 @@ public class GameManager : MonoBehaviour, IObserver {
         }
 
         DontDestroyOnLoad(this);
+    }
+
+    private void Start()
+    {
+       
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        
+    }
+
+    private void Update()
+    {
+        
     }
 
     public void setQualityLevel(int level)
@@ -84,14 +97,17 @@ public class GameManager : MonoBehaviour, IObserver {
     IEnumerator LoadScene(string scene)
     {
         AsyncOperation load = SceneManager.LoadSceneAsync(scene);
-        Slider slider = loadingBar.GetComponent<Slider>();
+        Instantiate(loaderBar);
+        Slider slider = loaderBar.GetComponentInChildren<Slider>();
 
+        
         while (!load.isDone)
         {
+
             float progress = Mathf.Clamp01(load.progress / 0.9f);
             slider.value = progress;
             yield return null;
-        }
+        }      
 
         finishSceneCreation();
     }

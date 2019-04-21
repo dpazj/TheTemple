@@ -25,10 +25,7 @@ public class PlayerController : MonoBehaviour {
 	private void Update ()
     {
 
-        if (Input.GetKey(KeyCode.Escape))
-        {
-            Cursor.lockState = CursorLockMode.None;
-        }
+        
     }
 
     private void FixedUpdate()
@@ -75,8 +72,8 @@ public class PlayerController : MonoBehaviour {
         if (!movementInfo.grounded) { return; }
         if (!movementInfo.canWalk)  //If player is trying to go up a hill, reduce their speed;
         {
-            movementInfo.forwardVelocity -= 0.1f;
-            movementInfo.straffeVelocity -= 0.1f;
+            movementInfo.forwardVelocity -= movementInfo.steepSpeedReduction;
+            movementInfo.straffeVelocity -= movementInfo.steepSpeedReduction;
         }
         else
         {

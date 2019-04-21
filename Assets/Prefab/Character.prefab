@@ -303,8 +303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11983df7c54a46446a61e97e50c28a76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waterKills: 1
-  tutorialBehaviour: 0
+  collisionNotifier: 1
   collector: 1
 --- !u!114 &114720782086254638
 MonoBehaviour:
@@ -321,7 +320,8 @@ MonoBehaviour:
   walkSpeed: 4
   runModifier: 0.1
   walkModifier: 0.1
-  climbableSteepness: 0.5
+  climbableSteepness: 0.6
+  steepSpeedReduction: 0.1
   jumpForce: 70
   jumpAirControl: 0.4
   minJumpTime: 0.15
