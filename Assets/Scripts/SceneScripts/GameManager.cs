@@ -41,9 +41,6 @@ public class GameManager : MonoBehaviour, IObserver {
 
     private void Start()
     {
-       
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
         
     }
 
@@ -96,6 +93,17 @@ public class GameManager : MonoBehaviour, IObserver {
 
     IEnumerator LoadScene(string scene)
     {
+        if(scene == "Menu")
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+
         AsyncOperation load = SceneManager.LoadSceneAsync(scene);
         Instantiate(loaderBar);
         Slider slider = loaderBar.GetComponentInChildren<Slider>();

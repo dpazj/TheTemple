@@ -15,6 +15,11 @@ public class LevelManager : MonoBehaviour {
     {
         character = GameObject.Find("Character");
         gameMap = GameObject.Find("GameMap");
+        
+    }
+
+    private void Start()
+    {
         spawn = gameMap.GetComponent<RespawnPoints>().spawn;
         respawnPoints = gameMap.GetComponent<RespawnPoints>().respawnPoints;
     }
