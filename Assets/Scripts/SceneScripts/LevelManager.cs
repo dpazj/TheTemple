@@ -31,10 +31,10 @@ public class LevelManager : MonoBehaviour {
         character.transform.Find("Camera").GetComponent<PostProcessingBehaviour>().enabled = active; 
     }
 
-    public void complete()
+    public void complete(string nextScene)
     {
         if(gameManager == null) { Debug.Log("No GameManager in scene"); return;}
-        gameManager.Notify("Island");
+        gameManager.Notify(nextScene);
     }
 
     public void setObserver(IObserver cb)

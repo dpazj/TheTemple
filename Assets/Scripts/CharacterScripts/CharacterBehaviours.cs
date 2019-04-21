@@ -6,9 +6,7 @@ public class CharacterBehaviours : MonoBehaviour {
 
 
     [SerializeField]
-    private bool waterKills;
-    [SerializeField]
-    private bool tutorialBehaviour;
+    private bool collisionNotifier;
     [SerializeField]
     private bool collector;
 
@@ -17,13 +15,9 @@ public class CharacterBehaviours : MonoBehaviour {
     TutorialBehaviour tb;*/
     private void Start()
     {
-        if (waterKills)
+        if (collisionNotifier)
         {
-            gameObject.AddComponent(typeof(WaterDeathBehaviour));
-        }
-        if (tutorialBehaviour)
-        {
-            gameObject.AddComponent(typeof(TutorialBehaviour));
+            gameObject.AddComponent(typeof(CollisionNotifier));
         }
         if (collector)
         {

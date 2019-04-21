@@ -51,3 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb9bbb23922556e4f8696a304e8920c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gems: {fileID: 0}
+  templeRock: {fileID: 0}
+  blindingLight: {fileID: 1832812423274604, guid: 59d82a9a508915340ae3474992178e4c,
+    type: 2}

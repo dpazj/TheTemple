@@ -21,9 +21,8 @@ public class TutorialManager : LevelManager, IObserver {
 
     private void Start()
     {
-        
         tutorialPopup = Instantiate(tutorialMessages).GetComponent<TutorialPopupControl>();
-        base.character.GetComponent<TutorialBehaviour>().setObserver(this);
+        character.GetComponent<CollisionNotifier>().setObserver(this);
         stageControl();
     }
 
@@ -169,7 +168,7 @@ public class TutorialManager : LevelManager, IObserver {
     private IEnumerator loadMainGame()
     {
         yield return new WaitForSeconds(4);
-        base.complete();
+        complete("Island");
     }
 
 }
