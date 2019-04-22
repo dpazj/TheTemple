@@ -11,7 +11,7 @@ public class LevelManager : MonoBehaviour {
     public Vector3[] respawnPoints { get; protected set; }
     public Vector3 spawn { get; protected set; }
 
-    private void Start()
+    private void Awake()
     {
         spawn = gameMap.GetComponent<RespawnPoints>().spawn;
         respawnPoints = gameMap.GetComponent<RespawnPoints>().respawnPoints;
@@ -26,7 +26,7 @@ public class LevelManager : MonoBehaviour {
 
     public void setPostProcessing(bool active)
     {
-        character.transform.Find("Camera").GetComponent<PostProcessingBehaviour>().enabled = active; 
+        //character.transform.Find("Camera").GetComponent<PostProcessingBehaviour>().enabled = active; 
     }
 
     public void complete(string nextScene)

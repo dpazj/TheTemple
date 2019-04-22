@@ -15,7 +15,7 @@ public class IslandManager : LevelManager, IObserver {
     private bool win = false;
 
 
-    public void Start()
+    public void initIsland()
     {
         //create observers
         initGemObservers();

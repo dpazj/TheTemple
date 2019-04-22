@@ -20,7 +20,7 @@ public class TutorialManager : LevelManager, IObserver {
     float moveDistance = 0;
     public float requiredDistance = 150f;
 
-    public void Start()
+    public void initTutorial()
     {
         tutorialPopup = tutorialMessages.GetComponent<TutorialPopupControl>();
         character.GetComponent<CollisionNotifier>().setObserver(this);
@@ -141,7 +141,7 @@ public class TutorialManager : LevelManager, IObserver {
 
     private void respawn()
     {
-        base.character.transform.position = base.respawnPoints[stage];
+        character.transform.position = respawnPoints[stage];
         if(stage != stages.Length)
         {
             updateChildColor(uncompleteMaterial);

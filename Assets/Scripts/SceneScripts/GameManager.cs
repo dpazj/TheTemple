@@ -81,11 +81,23 @@ public class GameManager : MonoBehaviour, IObserver {
         currentLevelManager = GameObject.Find(currentSceneName + "Manager").GetComponent<LevelManager>();
         currentLevelManager.spawnPlayer(true);
         currentLevelManager.setObserver(this);
+        specificInit();
+    }
+
+    private void specificInit()
+    {
+        if (currentSceneName == islandScene)
+        {
+            GameObject.Find(currentSceneName + "Manager").GetComponent<IslandManager>().initIsland();
+        }
+        else if (currentSceneName == tutorialScene) {
+            GameObject.Find(currentSceneName + "Manager").GetComponent<TutorialManager>().initTutorial();
+        }
     }
 
     IEnumerator LoadScene(string scene)
     {
-        if(scene == "Menu")
+        if(scene == menuScene)
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
@@ -109,7 +121,11 @@ public class GameManager : MonoBehaviour, IObserver {
             yield return null;
         }      
 
-        finishSceneCreation();
+        if(scene != menuScene)
+        {
+            finishSceneCreation();
+        }
+        
     }
 
 
