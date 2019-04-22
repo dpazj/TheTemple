@@ -21,9 +21,9 @@ public class GameManager : MonoBehaviour, IObserver {
 
     private int qualityLevel;
     private bool postProcessing = true;
+    private bool enableIslandScene = false;
 
     LevelManager currentLevelManager;
-
     string currentSceneName;
 
     public static GameManager instance = null;
@@ -116,10 +116,11 @@ public class GameManager : MonoBehaviour, IObserver {
         while (!load.isDone)
         {
 
-            float progress = Mathf.Clamp01(load.progress / 0.9f);
+            float progress = load.progress;
             slider.value = progress;
             yield return null;
-        }      
+        }
+        
 
         if(scene != menuScene)
         {
@@ -128,12 +129,15 @@ public class GameManager : MonoBehaviour, IObserver {
         
     }
 
+    
 
     public void Notify<T>(T t)
     {
         T t1 = (T)(object)t;
         string scene = (string)(object)t1;
+        
         loadScene(scene);
+        
     }
 
    
