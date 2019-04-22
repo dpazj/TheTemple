@@ -11,7 +11,7 @@ public class TutorialManager : LevelManager, IObserver {
     public Material completeMaterial;
     public Material uncompleteMaterial;
     public GameObject[] stages;
-    
+
     private int stage = 0;
     private TutorialPopupControl tutorialPopup;
 
@@ -20,13 +20,12 @@ public class TutorialManager : LevelManager, IObserver {
     float moveDistance = 0;
     public float requiredDistance = 150f;
 
-    private void Start()
+    public void Start()
     {
-        tutorialMessages = Instantiate(tutorialMessages);
         tutorialPopup = tutorialMessages.GetComponent<TutorialPopupControl>();
         character.GetComponent<CollisionNotifier>().setObserver(this);
         gem.GetComponent<TutorialGem>().setObserver(this);
-        tutorialPopup.createPopup("Use WASD to move");
+        stageControl();
     }
 
     void Update()
@@ -43,7 +42,9 @@ public class TutorialManager : LevelManager, IObserver {
 
         switch (stage)
         {
-            
+            case 0:
+                tutorialPopup.createPopup("Use WASD to move");
+                break;
             case 1:
                 tutorialPopup.changePopup("Use SPACE to jump");
                 break;

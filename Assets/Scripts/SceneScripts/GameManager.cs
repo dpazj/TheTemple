@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour, IObserver {
     private bool postProcessing = true;
 
     LevelManager currentLevelManager;
+
     string currentSceneName;
 
     public static GameManager instance = null;
@@ -39,15 +40,6 @@ public class GameManager : MonoBehaviour, IObserver {
         DontDestroyOnLoad(this);
     }
 
-    private void Start()
-    {
-        
-    }
-
-    private void Update()
-    {
-        
-    }
 
     public void setQualityLevel(int level)
     {
@@ -119,6 +111,7 @@ public class GameManager : MonoBehaviour, IObserver {
 
         finishSceneCreation();
     }
+
 
     public void Notify<T>(T t)
     {

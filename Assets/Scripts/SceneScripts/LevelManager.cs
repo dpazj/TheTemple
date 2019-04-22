@@ -6,17 +6,10 @@ using UnityEngine.PostProcessing;
 public class LevelManager : MonoBehaviour {
 
     IObserver gameManager;
-    GameObject gameMap;
-    public GameObject character { get; protected set; }
+    public GameObject gameMap;
+    public GameObject character;
     public Vector3[] respawnPoints { get; protected set; }
     public Vector3 spawn { get; protected set; }
-
-    private void Awake()
-    {
-        character = GameObject.Find("Character");
-        gameMap = GameObject.Find("GameMap");
-        
-    }
 
     private void Start()
     {

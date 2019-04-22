@@ -9,22 +9,20 @@ public class IslandManager : LevelManager, IObserver {
     public GameObject gems;
     public GameObject templeRock;
     public GameObject blindingLight;
-    private GameObject lightClone;
+    
     MovementInfo movementInfo;
 
     private bool win = false;
 
 
-    private void Start()
+    public void Start()
     {
         //create observers
         initGemObservers();
         character.GetComponent<CollisionNotifier>().setObserver(this);
         movementInfo = character.GetComponent<MovementInfo>();
-        lightClone = Instantiate(blindingLight);
-        lightClone.GetComponent<BlinderController>().setBright(true, 0);
-        lightClone.GetComponent<BlinderController>().setBright(false, 2);
-
+        blindingLight.GetComponent<BlinderController>().setBright(true, 0);
+        blindingLight.GetComponent<BlinderController>().setBright(false, 2);
     }
 
     private void initGemObservers()
@@ -121,7 +119,7 @@ public class IslandManager : LevelManager, IObserver {
             gemCount++;
         }
         yield return new WaitForSeconds(5);
-        lightClone.GetComponent<BlinderController>().setBright(true, 4f);
+        blindingLight.GetComponent<BlinderController>().setBright(true, 4f);
         yield return new WaitForSeconds(4);
         complete("Menu");
     }
