@@ -34,7 +34,8 @@ public class PlayerCamController : MonoBehaviour {
         if(mouseLook.y > 80f)
         {
             mouseLook.y = 80f;
-        }else if(mouseLook.y < -70f)
+        }
+        else if(mouseLook.y < -70f)
         {
             mouseLook.y = -70f;
         }

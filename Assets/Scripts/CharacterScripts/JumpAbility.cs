@@ -8,6 +8,7 @@ public class JumpAbility : MonoBehaviour {
     private MovementInfo movementInfo;
     private Rigidbody rigidBody;
     private bool jump = false;
+    private float coolDown;
  
 	void Start () {
         rigidBody = GetComponent<Rigidbody>();
@@ -24,13 +25,18 @@ public class JumpAbility : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        if (movementInfo.jumping) { movementInfo.timeJumping += Time.deltaTime; }
+        if (movementInfo.jumping) { movementInfo.timeJumping += Time.deltaTime;}
         Jump();
     }
 
     private void Jump()
     {
-        
+        if (coolDown > 0)
+        {
+            coolDown -= Time.deltaTime;
+            return;
+        }
+
         if (movementInfo.grounded && jump && !movementInfo.jumping)
         {
             rigidBody.velocity = Vector3.zero;//new Vector3(rigidBody.velocity.x, 0f, rigidBody.velocity.z);
@@ -43,8 +49,10 @@ public class JumpAbility : MonoBehaviour {
             }
             else if (movementInfo.forwardVelocity < 1)
             {
-            movementInfo.forwardJump = false;
+                movementInfo.forwardJump = false;
             }
+
+            coolDown = movementInfo.jumpCooldown;
         }
         
         jump = false;

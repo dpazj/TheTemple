@@ -38,6 +38,7 @@ public class MovementInfo : MonoBehaviour {
     public float jumpForce = 70.0f;
     public float jumpAirControl = 0.4f;
     public float minJumpTime = 0.15f;
+    public float jumpCooldown = 0.4f;
     [System.NonSerialized]
     public float timeJumping = 0;
 
