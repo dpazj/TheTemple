@@ -9,7 +9,7 @@ public class CollisionNotifier : MonoBehaviour {
     // Use this for initialization
     private void OnCollisionEnter(Collision collision)
     {
-        if(callback == null) { Debug.Log("Level Observer NotSet"); return;}
+        if(callback == null) { return;}
         callback.Notify(collision);
     }
 
