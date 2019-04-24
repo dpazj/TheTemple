@@ -6,6 +6,7 @@ using UnityEngine;
 public class IslandManager : LevelManager, IObserver {
 
     private int gemCount = 0;
+    private int collectedGems = 0;
     public GameObject gems;
     public GameObject templeRock;
     public GameObject blindingLight;
@@ -44,27 +45,25 @@ public class IslandManager : LevelManager, IObserver {
         {
             Collision collision = (Collision)test;
             tag = collision.gameObject.tag;
-        }
-        
-        
-        if(tag == "LevelComplete")
+
+            if (tag == "LevelComplete")
+            {
+                startWinSequence();
+            }
+            else if (tag == "Ocean")
+            {
+                respawn();
+            }
+        }else
         {
-            startWinSequence();
-        }
-        else if(tag == "Ocean")
-        {
-            respawn();
-        }
-        else
-        {
-            gemCount--;
+            collectedGems--;
             checkWinCondition();
         }
         
     }
     private void checkWinCondition()
     {
-        if(gemCount == 0)
+        if(collectedGems == gemCount)
         {
             toggleRock(true);
         }

@@ -20,6 +20,10 @@ public class TutorialManager : LevelManager, IObserver {
     float moveDistance = 0;
     public float requiredDistance = 150f;
 
+    void Start()
+    {
+        initTutorial(); //Remove 
+    }
     public void initTutorial()
     {
         tutorialPopup = tutorialMessages.GetComponent<TutorialPopupControl>();
@@ -55,24 +59,27 @@ public class TutorialManager : LevelManager, IObserver {
                 tutorialPopup.changePopup("Use the mouse to change direction mid jump. You may need to get some speed up for this one");
                 break;
             case 4:
-                tutorialPopup.changePopup("Hold E to wall run on the right");
+                tutorialPopup.changePopup("Use the mouse to shift the direction of your momentum as you jump around");
                 break;
             case 5:
-                tutorialPopup.changePopup("Hold Q to wall run on the left");
+                tutorialPopup.changePopup("Hold E to wall run on the right");
                 break;
             case 6:
-                tutorialPopup.changePopup("You can wall run round corners!");
+                tutorialPopup.changePopup("Hold Q to wall run on the left");
                 break;
             case 7:
-                tutorialPopup.changePopup("While jumping and toutching a wall, press space and move the mouse in the direction you wish to wall jump to");
+                tutorialPopup.changePopup("You can wall run round corners!");
                 break;
             case 8:
-                tutorialPopup.changePopup("While wall running, press space to launch yourself off the wall");
+                tutorialPopup.changePopup("While jumping and toutching a wall, press space and move the mouse in the direction you wish to wall jump to");
                 break;
             case 9:
-                tutorialPopup.changePopup("Collect the gem!");
+                tutorialPopup.changePopup("While wall running, press space to launch yourself off the wall");
                 break;
             case 10:
+                tutorialPopup.changePopup("Collect the gem!");
+                break;
+            case 11:
                 StartCoroutine(loadMainGame());
                 tutorialPopup.changePopup("Tutorial Complete!");
                 break;
