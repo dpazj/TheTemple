@@ -189,17 +189,7 @@ GameObject:
   m_PrefabParentObject: {fileID: 1080011335496052, guid: bcfc13f63f5b2094c8896e0c2d13a87d,
     type: 2}
   m_PrefabInternal: {fileID: 1621088465}
---- !u!1 &391501475 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1741123604094340, guid: bcfc13f63f5b2094c8896e0c2d13a87d,
-    type: 2}
-  m_PrefabInternal: {fileID: 1621088465}
---- !u!1 &420648703 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1458932394962618, guid: bcfc13f63f5b2094c8896e0c2d13a87d,
-    type: 2}
-  m_PrefabInternal: {fileID: 1621088465}
---- !u!1001 &552982710
+--- !u!1001 &364452017
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -216,7 +206,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4201911540680406, guid: 2d3b007562912474f93dd050846d89cf, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 54.14
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4201911540680406, guid: 2d3b007562912474f93dd050846d89cf, type: 2}
       propertyPath: m_LocalRotation.x
@@ -241,11 +231,16 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2d3b007562912474f93dd050846d89cf, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &552982711 stripped
+--- !u!1 &391501475 stripped
 GameObject:
-  m_PrefabParentObject: {fileID: 1865680428333862, guid: 2d3b007562912474f93dd050846d89cf,
+  m_PrefabParentObject: {fileID: 1741123604094340, guid: bcfc13f63f5b2094c8896e0c2d13a87d,
     type: 2}
-  m_PrefabInternal: {fileID: 552982710}
+  m_PrefabInternal: {fileID: 1621088465}
+--- !u!1 &420648703 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1458932394962618, guid: bcfc13f63f5b2094c8896e0c2d13a87d,
+    type: 2}
+  m_PrefabInternal: {fileID: 1621088465}
 --- !u!1 &594045421 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1980453264956998, guid: bcfc13f63f5b2094c8896e0c2d13a87d,
@@ -370,7 +365,7 @@ Prefab:
         type: 2}
       propertyPath: character
       value: 
-      objectReference: {fileID: 552982711}
+      objectReference: {fileID: 1418651799}
     - target: {fileID: 114295276679229530, guid: d52a2a2d430da054e84687d7fe876811,
         type: 2}
       propertyPath: gameMap
@@ -409,6 +404,11 @@ GameObject:
   m_PrefabParentObject: {fileID: 1587421925207168, guid: bcfc13f63f5b2094c8896e0c2d13a87d,
     type: 2}
   m_PrefabInternal: {fileID: 1621088465}
+--- !u!1 &1418651799 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1865680428333862, guid: 2d3b007562912474f93dd050846d89cf,
+    type: 2}
+  m_PrefabInternal: {fileID: 364452017}
 --- !u!1 &1424171490 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1761982950320378, guid: bcfc13f63f5b2094c8896e0c2d13a87d,

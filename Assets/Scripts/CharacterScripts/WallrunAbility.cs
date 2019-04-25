@@ -64,7 +64,7 @@ public class WallrunAbility : MonoBehaviour {
 
     private void CheckWallRun()
     {
-        if (!movementInfo.canWallRun || movementInfo.forwardVelocity < (movementInfo.maxSpeed * 0.75)) { cancelWallRun(); return; } //player must be at least at 75% of max speed to wall run
+        if (!movementInfo.canWallRun || movementInfo.forwardVelocity < (movementInfo.maxSpeed * 0.75)) { ; return; } //player must be at least at 75% of max speed to wall run
 
         if (!CheckSideValid())
         {
