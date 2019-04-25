@@ -33,8 +33,7 @@ public class JumpAbility : MonoBehaviour {
     {
         if (coolDown > 0)
         {
-            coolDown -= Time.deltaTime;
-            Debug.Log("Cooldown");
+            coolDown -= Time.fixedDeltaTime; 
             return;
         }
 

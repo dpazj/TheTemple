@@ -64,7 +64,7 @@ public class WallrunAbility : MonoBehaviour {
 
     private void CheckWallRun()
     {
-        if (!movementInfo.canWallRun || movementInfo.forwardVelocity < (movementInfo.maxSpeed * 0.75)) {return; } //player must be at least at 75% of max speed to wall run
+        if (!movementInfo.canWallRun || movementInfo.forwardVelocity < (movementInfo.maxSpeed * 0.75)) { cancelWallRun(); return; } //player must be at least at 75% of max speed to wall run
 
         if (!CheckSideValid())
         {
@@ -148,9 +148,9 @@ public class WallrunAbility : MonoBehaviour {
     {
         rigidBody.velocity = Vector3.zero;
         //runs along a sine curve
-        wallRunDistanceDone += wallrunSpeed * Time.deltaTime;
+        wallRunDistanceDone += wallrunSpeed * Time.fixedDeltaTime;
         float up = (movementInfo.wallRunHeight * Mathf.Sin(movementInfo.wallRunDistanceModifier * (wallRunDistanceDone / wallRunDistance)));
-        transform.Translate(0, up * Time.deltaTime, 0);
+        transform.Translate(0, up * Time.fixedDeltaTime, 0);
         if ((wallRunDistanceDone / wallRunDistance) > 0.45f) { cancelWallRun();}
 
     }

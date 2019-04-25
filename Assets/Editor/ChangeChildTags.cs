@@ -4,7 +4,7 @@ using System.Collections;
 
 public class ChangeChildTags : MonoBehaviour
 {
-
+    // taken from https://answers.unity.com/questions/167644/is-there-an-easy-way-to-apply-the-same-tag-to-all.html
     [MenuItem("GameObject/Change Children to Parent Tag")]
     public static void ChangeChildrenTags()
     {

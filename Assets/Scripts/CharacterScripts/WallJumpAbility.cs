@@ -34,7 +34,7 @@ public class WallJumpAbility : MonoBehaviour {
     {
         if (coolDown > 0)
         {
-            coolDown -= Time.deltaTime;
+            coolDown -= Time.fixedDeltaTime;
             return;
         }
         
@@ -65,7 +65,7 @@ public class WallJumpAbility : MonoBehaviour {
         movementInfo.wallRunning = false;
         movementInfo.canWallRun = true;
         rigidBody.useGravity = true;
-        applyForce(new Vector3(directionalMultiplier * 40f, 100f, 0));
+        applyForce(new Vector3(directionalMultiplier * 30f, 80f, 0));
 
     }
 

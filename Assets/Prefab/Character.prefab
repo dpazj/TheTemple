@@ -316,7 +316,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fbdeabb027323d4fbb8de68502ec0ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 8
+  maxSpeed: 8.5
   walkSpeed: 4
   runModifier: 0.175
   walkModifier: 0.1
@@ -325,7 +325,7 @@ MonoBehaviour:
   jumpForce: 70
   jumpAirControl: 0.4
   minJumpTime: 0.15
-  jumpCooldown: 0.15
+  jumpCooldown: 0
   wallRunHeight: 2.5
   wallRunDistanceModifier: 12
   wallJumpCoolDown: 0.3

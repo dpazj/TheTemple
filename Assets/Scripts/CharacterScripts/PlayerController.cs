@@ -58,8 +58,8 @@ public class PlayerController : MonoBehaviour {
             }
         }
 
-        h *= Time.deltaTime;
-        v *= Time.deltaTime;
+        h *= Time.fixedDeltaTime;
+        v *= Time.fixedDeltaTime;
 
         
         transform.Translate(h * Mathf.Abs(movementInfo.straffeVelocity), 0, v * Mathf.Abs(movementInfo.forwardVelocity));
