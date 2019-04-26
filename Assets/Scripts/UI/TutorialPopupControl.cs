@@ -35,6 +35,20 @@ public class TutorialPopupControl : MonoBehaviour {
        fadeTextIn();
     }
 
+    public void createTempPopup(string text, float time)
+    {
+        
+        setText(text);
+        StartCoroutine(tempPopup(time));
+    }
+
+    private IEnumerator tempPopup(float time)
+    {
+        yield return fadeText(true, 0.5f);
+        yield return new WaitForSeconds(time);
+        yield return fadeText(false, 0.5f);
+    }
+
     public void changePopup(string text)
     {
         StartCoroutine(change(text));

@@ -10,20 +10,27 @@ public class IslandManager : LevelManager, IObserver {
     public GameObject gems;
     public GameObject templeRock;
     public GameObject blindingLight;
-    
+    public GameObject messagePopup;
+    private TutorialPopupControl popup;
+
+
     MovementInfo movementInfo;
 
     private bool win = false;
 
-
+    void Start()
+    {
+        initIsland(); //remove in build
+    }
     public void initIsland()
     {
         //create observers
         initGemObservers();
         character.GetComponent<CollisionNotifier>().setObserver(this);
         movementInfo = character.GetComponent<MovementInfo>();
-        blindingLight.GetComponent<BlinderController>().setBright(true, 0);
-        blindingLight.GetComponent<BlinderController>().setBright(false, 2);
+        popup = messagePopup.GetComponent<TutorialPopupControl>();
+        popup.createTempPopup("Find and return the five lost gems to the temple",4f);
+
     }
 
     private void initGemObservers()

@@ -64,7 +64,9 @@ public class WallrunAbility : MonoBehaviour {
 
     private void CheckWallRun()
     {
-        if (!movementInfo.canWallRun || movementInfo.forwardVelocity < (movementInfo.maxSpeed * 0.75)) { ; return; } //player must be at least at 75% of max speed to wall run
+        if (movementInfo.forwardVelocity < (movementInfo.maxSpeed * 0.75)) { cancelWallRun(); return; }
+        if (!movementInfo.canWallRun) {return; } //player must be at least at 75% of max speed to wall run
+        
 
         if (!CheckSideValid())
         {
@@ -159,8 +161,8 @@ public class WallrunAbility : MonoBehaviour {
     private void cancelWallRun()
     {
         movementInfo.canWallRun = movementInfo.wallRunning ? false : true;
-        if (movementInfo.wallRunning) {normalCameraTilt();}
         movementInfo.wallRunning = false;
+        normalCameraTilt();
         rigidBody.useGravity = true;
     }
 

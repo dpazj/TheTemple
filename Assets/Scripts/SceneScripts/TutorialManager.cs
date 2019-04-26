@@ -203,8 +203,9 @@ public class TutorialManager : LevelManager, IObserver {
         tutorialPopup.createPopup("");
         BlinderController blind = Instantiate(blindingLight).GetComponent<BlinderController>();
         blind.setBright(true, 2f);
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(2);
         complete("Island");
+        blind.setBright(false, 0f);
     }
 
 }
