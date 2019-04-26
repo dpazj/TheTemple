@@ -37,7 +37,13 @@ public class IslandManager : LevelManager, IObserver {
     {
         foreach(Transform child in gems.transform)
         {
-            child.GetComponent<Gem>().setObserver(this);
+
+            Gem gem = child.Find("Gem").GetComponent<Gem>();
+            gem.setObserver(this);
+            foreach (Transform shard in child.Find("Shards"))
+            {
+                gem.setObserver(shard.GetComponent<GemShard>());
+            }
             gemCount++;
         }
     }
@@ -63,16 +69,23 @@ public class IslandManager : LevelManager, IObserver {
             }
         }else
         {
-            collectedGems--;
+            collectedGems++;
             checkWinCondition();
+            
         }
         
     }
     private void checkWinCondition()
     {
-        if(collectedGems == gemCount)
+
+        if (collectedGems == gemCount)
         {
             toggleRock(true);
+            popup.createTempPopup("All gems found! Head to the temple", 3f);
+        }
+        else
+        {
+            popup.createTempPopup(collectedGems + "/" + gemCount, 2f);
         }
     }
 

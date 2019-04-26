@@ -1,0 +1,34 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerAudioController : MonoBehaviour
+{
+
+    private AudioSource source;
+    public AudioClip gem;
+    public AudioClip gemShard;
+
+    void Start()
+    {
+        source = GetComponent<AudioSource>();
+    }
+
+    public void playGem()
+    {
+        source.volume = 0.1f;
+        playSound(gem);
+    }
+    public void playGemShard()
+    {
+        source.volume = 0.1f;
+        playSound(gemShard);
+    }
+
+    private void playSound(AudioClip sound)
+    {
+        source.PlayOneShot(sound);
+    }
+
+
+}

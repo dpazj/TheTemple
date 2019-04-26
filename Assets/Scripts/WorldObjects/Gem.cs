@@ -16,7 +16,10 @@ public class Gem : GemAnimator, ICollectable {
     {
         if (collected) { return; }
         collected = true;
+
         sendGemToTemple();
+
+
 
         foreach(IObserver obs in observers)
         {
@@ -43,6 +46,5 @@ public class Gem : GemAnimator, ICollectable {
     }
 
 
-    
 
 }

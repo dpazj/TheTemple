@@ -13,7 +13,7 @@ public class GemAnimator : MonoBehaviour {
 
     private void rotateGem()
     {
-        transform.Rotate(0, spinSpeed * Time.deltaTime, 0);
+        transform.Rotate(0, spinSpeed * Time.deltaTime, 0, Space.World);
     }
 
     public void updateRotateSpeed(float newSpeed, float time)
