@@ -18,8 +18,8 @@ public class WallJumpAbility : MonoBehaviour {
     }
 	
 	void Update () {
-              
-		if(Input.GetKeyDown(KeyCode.Space) && !movementInfo.wallJump) //Player has to be jumping/wall running
+        if (movementInfo.paused) { return; }
+        if (Input.GetKeyDown(KeyCode.Space) && !movementInfo.wallJump) //Player has to be jumping/wall running
         {
             if (movementInfo.wallJumpCounter < movementInfo.wallJumpWithoutReset)
             {
@@ -78,6 +78,8 @@ public class WallJumpAbility : MonoBehaviour {
         rigidBody.velocity = Vector3.zero;
         rigidBody.AddForce(forceWithDirection, ForceMode.Impulse);
 
+        GetComponent<PlayerAudioController>().playJump();//play jump sound
+
         coolDown = movementInfo.wallJumpCoolDown;
         movementInfo.wallJumpCounter++;
     }
@@ -86,8 +88,7 @@ public class WallJumpAbility : MonoBehaviour {
     {
         
         ContactPoint hit = collision.contacts[0];
-
-        if (movementInfo.wallJump && hit.normal.y < 0.1f && movementInfo.timeJumping > movementInfo.minJumpTime && !movementInfo.attemptingWallrun) //so that player doesnt instantly launch off things or jump if they are trying to wallrun
+        if (movementInfo.wallJump && hit.normal.y < 0.3f && movementInfo.timeJumping > movementInfo.minJumpTime && !movementInfo.attemptingWallrun) //so that player doesnt instantly launch off things or jump if they are trying to wallrun
         {
             applyForce(new Vector3(0, 90f, 0));
             movementInfo.wallJump = false;

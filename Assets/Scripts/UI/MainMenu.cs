@@ -10,5 +10,21 @@ public class MainMenu : MonoBehaviour {
         Application.Quit();
     }
 
+    public void resume()
+    {
+        GameObject.Find("GameManager").GetComponent<GameManager>().togglePause();
+    }
+
+    public void mainMenu()
+    {
+        GameObject.Find("GameManager").GetComponent<GameManager>().loadScene("Menu");
+    }
+
+    public void play()
+    {
+        GameObject.Find("GameManager").GetComponent<GameManager>().loadScene("Tutorial");
+    }
+
+        
     
 }

@@ -17,16 +17,18 @@ public class LevelManager : MonoBehaviour {
         respawnPoints = gameMap.GetComponent<RespawnPoints>().respawnPoints;
     }
 
-    public void spawnPlayer(bool postProActive)
+    public void spawnPlayer()
     {
-        
         character.transform.position = spawn;
-        setPostProcessing(postProActive);
     }
 
+    public void setPlayerSensitivity(float sens)
+    {
+        character.GetComponentInChildren<PlayerCamController>().sensitivity = sens;
+    }
     public void setPostProcessing(bool active)
     {
-        //character.transform.Find("Camera").GetComponent<PostProcessingBehaviour>().enabled = active; 
+        character.GetComponentInChildren<PostProcessingBehaviour>().enabled = active; 
     }
 
     public void complete(string nextScene)
@@ -38,6 +40,11 @@ public class LevelManager : MonoBehaviour {
     public void setObserver(IObserver cb)
     {
         gameManager = cb;
+    }
+
+    public void pauseCharacter(bool val)
+    {
+        character.GetComponent<MovementInfo>().paused = val;
     }
 
     

@@ -62,8 +62,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1865680428333862}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -472, y: 135, z: -173}
+  m_LocalRotation: {x: 0, y: 0.009752468, z: 0, w: 0.99995244}
+  m_LocalPosition: {x: -17.3, y: 133.2, z: -327.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4942240808394726}
@@ -395,11 +395,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1865680428333862}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3583553d50975e34583e7a4239511134, type: 3}
+  m_Script: {fileID: 11500000, guid: f724c1706ff49474396a0189b6ee4c33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   gem: {fileID: 8300000, guid: 476ff9a2efcf2c94d9cca3f9b45d9b5b, type: 3}
   gemShard: {fileID: 8300000, guid: 03974e0c53043654a9f7fa347f11a82b, type: 3}
+  jump: {fileID: 8300000, guid: a5db2bc3873c6a644b66f2d9f5162f17, type: 3}
 --- !u!114 &114720782086254638
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -20,7 +20,7 @@ public class IslandManager : LevelManager, IObserver {
 
     void Start()
     {
-        initIsland(); //remove in build
+       // initIsland(); //remove in build
     }
     public void initIsland()
     {

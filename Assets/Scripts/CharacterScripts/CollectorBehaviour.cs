@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class CollectorBehaviour : MonoBehaviour {
 
-    PlayerAudioController audio;
+    PlayerAudioController audioControl;
     void Awake()
     {
-        audio = GetComponent<PlayerAudioController>();
+        audioControl = GetComponent<PlayerAudioController>();
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -17,10 +17,10 @@ public class CollectorBehaviour : MonoBehaviour {
             collision.gameObject.GetComponent<ICollectable>().collect();
             if(tag == "Gem")
             {
-                audio.playGem();
+                audioControl.playGem();
             }else if(tag == "GemShard")
             {
-                audio.playGemShard();
+                audioControl.playGemShard();
             }
         }
     }

@@ -4,16 +4,22 @@ using UnityEngine;
 
 public class PlayerAudioController : MonoBehaviour
 {
-
     private AudioSource source;
+
     public AudioClip gem;
     public AudioClip gemShard;
+    public AudioClip jump;
 
     void Start()
     {
         source = GetComponent<AudioSource>();
     }
 
+    public void playJump()
+    {
+        source.volume = 0.1f;
+        playSound(jump);
+    }
     public void playGem()
     {
         source.volume = 0.1f;

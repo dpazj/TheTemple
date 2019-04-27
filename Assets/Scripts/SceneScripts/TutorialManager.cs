@@ -22,12 +22,11 @@ public class TutorialManager : LevelManager, IObserver {
 
     void Start()
     {
-       initTutorial(); //Remove 
+       //initTutorial(); //Remove in build
     }
     public void initTutorial()
     {
         tutorialPopup = tutorialMessages.GetComponent<TutorialPopupControl>();
-        Debug.Log(character.GetComponent<CollisionNotifier>());
         character.GetComponent<CollisionNotifier>().setObserver(this);
         gem.GetComponent<TutorialGem>().setObserver(this);
         stageControl();

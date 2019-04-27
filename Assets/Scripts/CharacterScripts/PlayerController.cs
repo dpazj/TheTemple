@@ -21,15 +21,10 @@ public class PlayerController : MonoBehaviour {
         movementInfo.straffeVelocity = 0;
 
     }
-	
-	private void Update ()
-    {
-
-        
-    }
 
     private void FixedUpdate()
     {
+        if (movementInfo.paused) { return; }
         Movement();
     }
 

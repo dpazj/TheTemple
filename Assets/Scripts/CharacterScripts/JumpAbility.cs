@@ -17,6 +17,7 @@ public class JumpAbility : MonoBehaviour {
 	
 
 	void Update () {
+        if (movementInfo.paused) { return; }
         if (!jump && Input.GetKey(KeyCode.Space))
         {
             jump = true;
@@ -44,6 +45,7 @@ public class JumpAbility : MonoBehaviour {
             rigidBody.velocity = Vector3.zero;//new Vector3(rigidBody.velocity.x, 0f, rigidBody.velocity.z);
             rigidBody.AddForce(new Vector3(0f, movementInfo.jumpForce, 0f), ForceMode.Impulse);
             movementInfo.jumping = true;
+            
                 
             if (movementInfo.forwardVelocity > 1)
             {

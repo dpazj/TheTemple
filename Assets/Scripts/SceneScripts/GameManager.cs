@@ -17,14 +17,17 @@ public class GameManager : MonoBehaviour, IObserver {
     private string finalLevelScene;
     [SerializeField]
     GameObject loaderBar;
-
-
-    private int qualityLevel;
-    private bool postProcessing = true;
-    private bool enableIslandScene = false;
+    [SerializeField]
+    GameObject escapeMenu;
+    private GameObject instantiatedEscapeMenu;
 
     LevelManager currentLevelManager;
     string currentSceneName;
+    private bool paused = false;
+
+    //Settings
+    public float sensitivity = 2f;
+    public bool postProcessing = true;
 
     public static GameManager instance = null;
     private void Awake() //Singleton
@@ -40,25 +43,16 @@ public class GameManager : MonoBehaviour, IObserver {
         DontDestroyOnLoad(this);
     }
 
-
-    public void setQualityLevel(int level)
+    private void Update()
     {
-        qualityLevel = level;
-        QualitySettings.SetQualityLevel(qualityLevel, true);
+        if (Input.GetKeyDown(KeyCode.Escape) && currentSceneName != menuScene)
+        {
+            togglePause();
+        }
     }
-    public int getQualityLevel() { return this.qualityLevel; }
-
-    public void setPostProcessing(bool val)
-    {
-        postProcessing = val;
-        //TODO enable character post processing
-    }
-
-    public bool getPostProcessing() { return this.postProcessing; }
 
     public void loadScene(string scene)
     {
-        
         if (scene.Equals(islandScene))
         {
             StartCoroutine(LoadScene(islandScene));
@@ -68,6 +62,11 @@ public class GameManager : MonoBehaviour, IObserver {
         {
             StartCoroutine(LoadScene(tutorialScene));
             currentSceneName = tutorialScene;
+        }
+        else if(scene.Equals(menuScene))
+        {
+            StartCoroutine(LoadScene(menuScene));
+            currentSceneName = menuScene;
         }
         else
         {
@@ -79,7 +78,9 @@ public class GameManager : MonoBehaviour, IObserver {
     private void finishSceneCreation()
     {
         currentLevelManager = GameObject.Find(currentSceneName + "Manager").GetComponent<LevelManager>();
-        currentLevelManager.spawnPlayer(true);
+        currentLevelManager.spawnPlayer();
+        currentLevelManager.setPlayerSensitivity(sensitivity);
+        currentLevelManager.setPostProcessing(postProcessing);
         currentLevelManager.setObserver(this);
         specificInit();
     }
@@ -126,10 +127,13 @@ public class GameManager : MonoBehaviour, IObserver {
         {
             finishSceneCreation();
         }
+        else
+        {
+            Destroy(currentLevelManager);
+        }
         
     }
 
-    
 
     public void Notify<T>(T t)
     {
@@ -140,5 +144,43 @@ public class GameManager : MonoBehaviour, IObserver {
         
     }
 
-   
+    public void setSensitivity(float sens)
+    {
+        sensitivity = sens;
+        if (currentLevelManager != null)
+        {
+            currentLevelManager.setPlayerSensitivity(sens);
+        }
+    }
+
+    public void setPostProcessing(bool val)
+    {
+        postProcessing = val;
+        if (currentLevelManager != null)
+        {
+            currentLevelManager.setPostProcessing(postProcessing);
+        }
+    }
+
+    public void togglePause()
+    {
+        if (paused) {
+            //do things to resume
+            Cursor.visible = false;
+            Destroy(instantiatedEscapeMenu);
+            currentLevelManager.pauseCharacter(false);
+        }
+        else
+        {
+            //pause things
+            Cursor.visible = true;
+            currentLevelManager.pauseCharacter(true);
+            instantiatedEscapeMenu = Instantiate(escapeMenu);
+
+        }
+
+        paused = !paused;
+               
+    }
+
 }

@@ -58,6 +58,8 @@ public class MovementInfo : MonoBehaviour {
     [System.NonSerialized]
     public bool wallJump = false;
 
+    //other
+    public bool paused = false;
 
     //Observes these classes
     CapsuleCollider capsule;

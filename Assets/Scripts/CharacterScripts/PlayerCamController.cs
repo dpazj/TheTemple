@@ -23,6 +23,7 @@ public class PlayerCamController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (character.GetComponent<MovementInfo>().paused) { return; }
         Vector2 md = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
 
         md = Vector2.Scale(md, new Vector2(sensitivity * smoothing, sensitivity * smoothing));
