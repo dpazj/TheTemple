@@ -20,7 +20,7 @@ public class IslandManager : LevelManager, IObserver {
 
     void Start()
     {
-       // initIsland(); //remove in build
+        //initIsland(); //remove in build
     }
     public void initIsland()
     {
@@ -122,6 +122,7 @@ public class IslandManager : LevelManager, IObserver {
 
     void startWinSequence()
     {
+        
         if (win) { return;}
         win = true;
         toggleRock(false);
@@ -133,8 +134,8 @@ public class IslandManager : LevelManager, IObserver {
         
         foreach (Transform child in gems.transform)
         {
-            child.GetComponent<Gem>().updateRotateSpeed(2500, 7f);
-            child.GetComponent<Gem>().moveTo(new Vector3(367.05f, 191.2f,64.5f),5f);
+            child.GetComponentInChildren<Gem>().updateRotateSpeed(2500, 7f); 
+            child.GetComponentInChildren<Gem>().moveTo(new Vector3(367.05f, 191.2f,64.5f),5f);
             gemCount++;
         }
         yield return new WaitForSeconds(5);
