@@ -167,6 +167,7 @@ public class GameManager : MonoBehaviour, IObserver {
         if (paused) {
             //do things to resume
             Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
             Destroy(instantiatedEscapeMenu);
             currentLevelManager.pauseCharacter(false);
         }
@@ -174,6 +175,7 @@ public class GameManager : MonoBehaviour, IObserver {
         {
             //pause things
             Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
             currentLevelManager.pauseCharacter(true);
             instantiatedEscapeMenu = Instantiate(escapeMenu);
 
