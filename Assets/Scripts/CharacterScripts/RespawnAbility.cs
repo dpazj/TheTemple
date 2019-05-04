@@ -7,12 +7,12 @@ public class RespawnAbility : MonoBehaviour {
     MovementInfo info;
     Vector3 respawnPoint;
     private bool canRespawn = false;
-    private PlayerAudioController audio;
+    private PlayerAudioController playerAudio;
 	
     void Start()
     {
         info = GetComponent<MovementInfo>();
-        audio = GetComponent<PlayerAudioController>();
+        playerAudio = GetComponent<PlayerAudioController>();
     }
 	void Update () {
         if (Input.GetKeyDown(KeyCode.C) && info.grounded)
@@ -30,9 +30,9 @@ public class RespawnAbility : MonoBehaviour {
         respawnPoint = transform.position;
         respawnPoint.y += 1f;
 
-        if(audio != null)
+        if(playerAudio != null)
         {
-            audio.playCheckPoint();
+            playerAudio.playCheckPoint();
         }
     }
 

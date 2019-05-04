@@ -473,6 +473,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114813732781557980, guid: bcfc13f63f5b2094c8896e0c2d13a87d,
+        type: 2}
+      propertyPath: respawnPoints.Array.size
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 4627007189889252, guid: bcfc13f63f5b2094c8896e0c2d13a87d, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -614,6 +619,21 @@ Prefab:
     - target: {fileID: 1766694346113660, guid: bcfc13f63f5b2094c8896e0c2d13a87d, type: 2}
       propertyPath: m_TagString
       value: SectionComplete
+      objectReference: {fileID: 0}
+    - target: {fileID: 114813732781557980, guid: bcfc13f63f5b2094c8896e0c2d13a87d,
+        type: 2}
+      propertyPath: respawnPoints.Array.data[11].x
+      value: -10.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114813732781557980, guid: bcfc13f63f5b2094c8896e0c2d13a87d,
+        type: 2}
+      propertyPath: respawnPoints.Array.data[11].y
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 114813732781557980, guid: bcfc13f63f5b2094c8896e0c2d13a87d,
+        type: 2}
+      propertyPath: respawnPoints.Array.data[11].z
+      value: 178
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bcfc13f63f5b2094c8896e0c2d13a87d, type: 2}

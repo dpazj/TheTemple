@@ -101,7 +101,7 @@ public class WallJumpAbility : MonoBehaviour {
     {
         
         ContactPoint hit = collision.contacts[0];
-        if (hit.normal.y < 1f) 
+        if (hit.normal.y < 0.3f) 
         {
             normalWallJumpTimer = 0.3f;
         }
