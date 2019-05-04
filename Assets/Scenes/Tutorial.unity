@@ -782,6 +782,31 @@ Prefab:
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114927605000992232, guid: 5d8601085f5001c46ac8857b0547727b,
+        type: 2}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114927605000992232, guid: 5d8601085f5001c46ac8857b0547727b,
+        type: 2}
+      propertyPath: m_textInfo.characterCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114927605000992232, guid: 5d8601085f5001c46ac8857b0547727b,
+        type: 2}
+      propertyPath: m_textInfo.wordCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114927605000992232, guid: 5d8601085f5001c46ac8857b0547727b,
+        type: 2}
+      propertyPath: m_textInfo.lineCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114927605000992232, guid: 5d8601085f5001c46ac8857b0547727b,
+        type: 2}
+      propertyPath: m_textInfo.pageCount
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5d8601085f5001c46ac8857b0547727b, type: 2}
   m_IsPrefabParent: 0

@@ -11,6 +11,8 @@ public class WallJumpAbility : MonoBehaviour {
 
     private RaycastHit rayhit;
 
+    private float normalWallJumpTimer;
+    
 
     void Start () {
         movementInfo = GetComponent<MovementInfo>();
@@ -37,10 +39,21 @@ public class WallJumpAbility : MonoBehaviour {
             coolDown -= Time.fixedDeltaTime;
             return;
         }
+
+        if(normalWallJumpTimer > 0) {
+            normalWallJumpTimer -= Time.fixedDeltaTime;
+            Debug.Log(normalWallJumpTimer);
+            if (movementInfo.wallJump && movementInfo.timeJumping > movementInfo.minJumpTime && !movementInfo.attemptingWallrun) // so that player doesnt instantly launch off things or jump if they are trying to wallrun
+            {
+                applyForce(new Vector3(0, 90f, 0));
+                movementInfo.wallJump = false;
+                normalWallJumpTimer = 0;
+                
+            }
+        }
         
         if (movementInfo.wallJump && !movementInfo.grounded &&  movementInfo.wallRunning)
         {
-            
             if (movementInfo.wallRunning)
             {
                 if (Physics.Raycast(transform.position, transform.right, out rayhit, 0.7f) && rayhit.transform.tag == "Wall") //raycast right
@@ -55,6 +68,8 @@ public class WallJumpAbility : MonoBehaviour {
                 movementInfo.wallJump = false;
             }
         }
+
+        
     }
 
     private void wallRunJump(int directionalMultiplier)
@@ -88,10 +103,9 @@ public class WallJumpAbility : MonoBehaviour {
     {
         
         ContactPoint hit = collision.contacts[0];
-        if (movementInfo.wallJump && hit.normal.y < 0.3f && movementInfo.timeJumping > movementInfo.minJumpTime && !movementInfo.attemptingWallrun) //so that player doesnt instantly launch off things or jump if they are trying to wallrun
+        if (hit.normal.y < 0.3f) 
         {
-            applyForce(new Vector3(0, 90f, 0));
-            movementInfo.wallJump = false;
+            normalWallJumpTimer = 0.3f;
         }
     }
 
