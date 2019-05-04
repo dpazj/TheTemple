@@ -9,6 +9,7 @@ public class PlayerAudioController : MonoBehaviour
     public AudioClip gem;
     public AudioClip gemShard;
     public AudioClip jump;
+    public AudioClip checkpointPlaced;
 
     void Start()
     {
@@ -29,6 +30,12 @@ public class PlayerAudioController : MonoBehaviour
     {
         source.volume = 0.025f;
         playSound(gemShard);
+    }
+
+    public void playCheckPoint()
+    {
+        source.volume = 0.1f;
+        playSound(checkpointPlaced);
     }
 
     private void playSound(AudioClip sound)

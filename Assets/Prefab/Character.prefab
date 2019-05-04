@@ -126,7 +126,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1865680428333862}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -413,6 +413,7 @@ MonoBehaviour:
   gem: {fileID: 8300000, guid: 476ff9a2efcf2c94d9cca3f9b45d9b5b, type: 3}
   gemShard: {fileID: 8300000, guid: 03974e0c53043654a9f7fa347f11a82b, type: 3}
   jump: {fileID: 8300000, guid: a5db2bc3873c6a644b66f2d9f5162f17, type: 3}
+  checkpointPlaced: {fileID: 8300000, guid: 2badf38dd275d254c9f5ded1f66d26e4, type: 3}
 --- !u!114 &114720782086254638
 MonoBehaviour:
   m_ObjectHideFlags: 1
