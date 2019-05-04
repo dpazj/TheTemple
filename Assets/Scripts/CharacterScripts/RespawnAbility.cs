@@ -26,6 +26,7 @@ public class RespawnAbility : MonoBehaviour {
     {
         canRespawn = true;
         respawnPoint = transform.position;
+        respawnPoint.y += 1f;
     }
 
     private void respawnAtPoint()
