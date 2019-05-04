@@ -22,10 +22,7 @@ public class TutorialManager : LevelManager, IObserver {
     float moveDistance = 0;
     public float requiredDistance = 150f;
 
-    void Start()
-    {
-      initTutorial(); //Remove in build
-    }
+
     public void initTutorial()
     {
         tutorialPopup = tutorialMessages.GetComponent<TutorialPopupControl>();
@@ -45,8 +42,6 @@ public class TutorialManager : LevelManager, IObserver {
             teachRespawn();
         }
     }
-
-  
 
     private void stageControl()
     {
@@ -78,7 +73,7 @@ public class TutorialManager : LevelManager, IObserver {
                 tutorialPopup.changePopup("You can wall run round corners!");
                 break;
             case 8:
-                tutorialPopup.changePopup("While jumping and touching a wall, press space and move the mouse in the direction you wish to wall jump to");
+                tutorialPopup.changePopup("If you jump into a wall, press SPACE again after making contact to perform a wall jump. Hint: move the mouse after to change what direction you jump in!");
                 break;
             case 9:
                 tutorialPopup.changePopup("While wall running, press space to launch yourself off the wall");

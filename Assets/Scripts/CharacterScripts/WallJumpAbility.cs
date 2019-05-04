@@ -29,7 +29,6 @@ public class WallJumpAbility : MonoBehaviour {
             }
             
         }
-        
     }
 
     private void FixedUpdate()
@@ -42,7 +41,6 @@ public class WallJumpAbility : MonoBehaviour {
 
         if(normalWallJumpTimer > 0) {
             normalWallJumpTimer -= Time.fixedDeltaTime;
-            Debug.Log(normalWallJumpTimer);
             if (movementInfo.wallJump && movementInfo.timeJumping > movementInfo.minJumpTime && !movementInfo.attemptingWallrun) // so that player doesnt instantly launch off things or jump if they are trying to wallrun
             {
                 applyForce(new Vector3(0, 90f, 0));
@@ -80,7 +78,7 @@ public class WallJumpAbility : MonoBehaviour {
         movementInfo.wallRunning = false;
         movementInfo.canWallRun = true;
         rigidBody.useGravity = true;
-        applyForce(new Vector3(directionalMultiplier * 30f, 80f, 0));
+        applyForce(new Vector3(directionalMultiplier * 30f, 60f, 0));
 
     }
 
@@ -103,7 +101,8 @@ public class WallJumpAbility : MonoBehaviour {
     {
         
         ContactPoint hit = collision.contacts[0];
-        if (hit.normal.y < 0.3f) 
+        Debug.Log(hit.normal.y);
+        if (hit.normal.y < 1f) 
         {
             normalWallJumpTimer = 0.3f;
         }

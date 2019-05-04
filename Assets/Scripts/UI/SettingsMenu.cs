@@ -10,9 +10,6 @@ public class SettingsMenu : MonoBehaviour {
     public Toggle ppToggle;
     
 
-
-    
-
     private void Awake()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();

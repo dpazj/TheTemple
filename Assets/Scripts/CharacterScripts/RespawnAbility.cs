@@ -13,7 +13,7 @@ public class RespawnAbility : MonoBehaviour {
         info = GetComponent<MovementInfo>();
     }
 	void Update () {
-        if (Input.GetKey(KeyCode.C))
+        if (Input.GetKey(KeyCode.C) && info.grounded)
         {
             setRespawn();
         }else if (Input.GetKey(KeyCode.R) && info.grounded)
