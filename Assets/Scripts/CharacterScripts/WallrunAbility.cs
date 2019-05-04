@@ -109,7 +109,7 @@ public class WallrunAbility : MonoBehaviour {
 
     private void WallRunExecute(Vector3 dir)
     {
-        if (Physics.Raycast(transform.position, dir, out rcLeft, 1.3f) && rcLeft.transform.tag == "Wall") //if player is toutching wall and pressing correct key
+        if (Physics.Raycast(transform.position, dir, out rcLeft, 0.9f) && rcLeft.transform.tag == "Wall") //if player is toutching wall and pressing correct key
         {
             //now we need to check if player has been wall running already
             if (!movementInfo.wallRunning)

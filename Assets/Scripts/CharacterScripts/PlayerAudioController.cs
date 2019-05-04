@@ -27,7 +27,7 @@ public class PlayerAudioController : MonoBehaviour
     }
     public void playGemShard()
     {
-        source.volume = 0.1f;
+        source.volume = 0.025f;
         playSound(gemShard);
     }
 

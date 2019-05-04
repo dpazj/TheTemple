@@ -15,6 +15,8 @@ public class TutorialManager : LevelManager, IObserver {
     private int stage = 0;
     private TutorialPopupControl tutorialPopup;
 
+    bool cPressed = false;
+    bool rPressed = false;
 
     //Movement
     float moveDistance = 0;
@@ -22,7 +24,7 @@ public class TutorialManager : LevelManager, IObserver {
 
     void Start()
     {
-       //initTutorial(); //Remove in build
+      initTutorial(); //Remove in build
     }
     public void initTutorial()
     {
@@ -38,8 +40,13 @@ public class TutorialManager : LevelManager, IObserver {
         if(stage == 0)
         {
             teachMovement();
+        }else if(stage == 10)
+        {
+            teachRespawn();
         }
     }
+
+  
 
     private void stageControl()
     {
@@ -56,7 +63,7 @@ public class TutorialManager : LevelManager, IObserver {
                 tutorialPopup.changePopup("Use SHIFT to sprint. You may need to have a run up to build enough momentum!");
                 break;
             case 3:
-                tutorialPopup.changePopup("Use the mouse to change direction mid jump. You may need to get some speed up for this one");
+                tutorialPopup.changePopup("This one requires a strafe jump: run along the top of the stairs to get some speed up, jump and then turn to face the direction you wish to go");
                 break;
             case 4:
                 tutorialPopup.changePopup("Use the mouse to shift the direction of your momentum as you jump around");
@@ -71,15 +78,18 @@ public class TutorialManager : LevelManager, IObserver {
                 tutorialPopup.changePopup("You can wall run round corners!");
                 break;
             case 8:
-                tutorialPopup.changePopup("While jumping and toutching a wall, press space and move the mouse in the direction you wish to wall jump to");
+                tutorialPopup.changePopup("While jumping and touching a wall, press space and move the mouse in the direction you wish to wall jump to");
                 break;
             case 9:
                 tutorialPopup.changePopup("While wall running, press space to launch yourself off the wall");
                 break;
             case 10:
-                tutorialPopup.changePopup("Collect the gem!");
+                tutorialPopup.changePopup("Use C to mark a checkpoint");
                 break;
             case 11:
+                tutorialPopup.changePopup("Collect the gem!");
+                break;
+            case 12:
                 StartCoroutine(loadMainGame());
                 tutorialPopup.changePopup("Tutorial Complete!");
                 break;
@@ -95,28 +105,45 @@ public class TutorialManager : LevelManager, IObserver {
         moveDistance += Mathf.Abs(h) + Mathf.Abs(v);
 
         if(moveDistance > requiredDistance)
-        { 
+        {
             stageComplete();
+            load(stage);
         }
     }
 
-   
+    private void teachRespawn()
+    {
+        
+
+        if (!cPressed) //c has to be pressed first
+        {
+            cPressed = Input.GetKey(KeyCode.C);
+            if (cPressed) { tutorialPopup.changePopup("Use R to respawn there"); }
+        }
+        else if(cPressed && !rPressed) //then checks player has pressed r
+        {
+            rPressed = Input.GetKey(KeyCode.R);
+        }
+        else if (cPressed && rPressed)
+        {
+            load(stage);
+            stageComplete();
+        }
+        
+    }
+
+
     private void stageComplete()
     {
         updateChildColor(completeMaterial);
         untagSection();
-        if (stage + 1 < stages.Length)
-        {
-            loadNext();
-        }
-                
         stage++;
         stageControl();
     }
 
-    private void loadNext()
+    private void load(int stageToLoad)
     {
-        stages[stage + 1].SetActive(true);
+        stages[stage].SetActive(true);
     }
 
     private void updateChildColor(Material color)
@@ -165,6 +192,7 @@ public class TutorialManager : LevelManager, IObserver {
             string message = (string)t1;
             if(message == "GemCollected")
             {
+                
                 stageComplete();
             }
         }
@@ -183,6 +211,11 @@ public class TutorialManager : LevelManager, IObserver {
             else if (collision.gameObject.tag == "SectionComplete")
             {
                 stageComplete();
+
+                if (stage != 10)
+                {
+                    load(stage + 1);
+                }
             }
             else if (collision.gameObject.tag == "Wall")
             {

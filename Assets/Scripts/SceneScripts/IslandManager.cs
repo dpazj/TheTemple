@@ -30,7 +30,7 @@ public class IslandManager : LevelManager, IObserver {
         movementInfo = character.GetComponent<MovementInfo>();
         popup = messagePopup.GetComponent<TutorialPopupControl>();
         popup.createTempPopup("Find and return the five lost gems to the temple",4f);
-
+        
     }
 
     private void initGemObservers()
