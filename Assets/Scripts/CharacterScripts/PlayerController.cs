@@ -65,10 +65,11 @@ public class PlayerController : MonoBehaviour {
 
     private void GetSpeed(float h, float v){
         if (!movementInfo.grounded) { return; }
-        if (!movementInfo.canWalk)  //If player is trying to go up a hill, reduce their speed;
+        if (!movementInfo.canWalk )  //If player is trying to go up a hill, reduce their speed;
         {
             movementInfo.forwardVelocity -= movementInfo.steepSpeedReduction;
             movementInfo.straffeVelocity -= movementInfo.steepSpeedReduction;
+            if (!movementInfo.grounded) { return;}
         }
         else
         {

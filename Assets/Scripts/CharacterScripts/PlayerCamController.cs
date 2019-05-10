@@ -26,7 +26,7 @@ public class PlayerCamController : MonoBehaviour {
         if (character.GetComponent<MovementInfo>().paused) { return; }
         Vector2 md = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
 
-        md = Vector2.Scale(md, new Vector2(sensitivity * smoothing, sensitivity * smoothing));
+        md = Vector2.Scale(md, new Vector2((sensitivity * 0.5f) * smoothing, (sensitivity * 0.5f) * smoothing));
         smoothV.x = Mathf.Lerp(smoothV.x, md.x, 1f / smoothing);
         smoothV.y = Mathf.Lerp(smoothV.y, md.y, 1f / smoothing);
 

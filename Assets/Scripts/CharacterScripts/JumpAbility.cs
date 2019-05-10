@@ -41,7 +41,6 @@ public class JumpAbility : MonoBehaviour {
         if (movementInfo.grounded && jump && !movementInfo.jumping && movementInfo.canWalk)
         {
             Vector3 forceWithDirection = transform.up * movementInfo.jumpForce;
-            forceWithDirection += transform.forward * 3f;
 
             rigidBody.velocity = Vector3.zero;//new Vector3(rigidBody.velocity.x, 0f, rigidBody.velocity.z);
             rigidBody.AddForce(forceWithDirection, ForceMode.Impulse);
