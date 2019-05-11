@@ -40,25 +40,32 @@ public class JumpAbility : MonoBehaviour {
 
         if (movementInfo.grounded && jump && !movementInfo.jumping && movementInfo.canWalk)
         {
-            Vector3 forceWithDirection = transform.up * movementInfo.jumpForce;
-
-            rigidBody.velocity = Vector3.zero;//new Vector3(rigidBody.velocity.x, 0f, rigidBody.velocity.z);
-            rigidBody.AddForce(forceWithDirection, ForceMode.Impulse);
-            movementInfo.jumping = true;
-            
-                
-            if (movementInfo.forwardVelocity > 1)
-            {
-                movementInfo.forwardJump = true;
-            }
-            else if (movementInfo.forwardVelocity < 1)
-            {
-                movementInfo.forwardJump = false;
-            }
-
-            coolDown = movementInfo.jumpCooldown;
+            unityJump();
         }
         
         jump = false;
+    }
+
+    
+
+    private void unityJump()
+    {
+        Vector3 forceWithDirection = transform.up * movementInfo.jumpForce;
+
+        rigidBody.velocity = Vector3.zero;//new Vector3(rigidBody.velocity.x, 0f, rigidBody.velocity.z);
+        rigidBody.AddForce(forceWithDirection, ForceMode.Impulse);
+        movementInfo.jumping = true;
+
+
+        if (movementInfo.forwardVelocity > 1)
+        {
+            movementInfo.forwardJump = true;
+        }
+        else if (movementInfo.forwardVelocity < 1)
+        {
+            movementInfo.forwardJump = false;
+        }
+
+        coolDown = movementInfo.jumpCooldown;
     }
 }
