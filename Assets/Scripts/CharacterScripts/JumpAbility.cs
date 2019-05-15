@@ -56,7 +56,6 @@ public class JumpAbility : MonoBehaviour {
         rigidBody.AddForce(forceWithDirection, ForceMode.Impulse);
         movementInfo.jumping = true;
 
-
         if (movementInfo.forwardVelocity > 1)
         {
             movementInfo.forwardJump = true;

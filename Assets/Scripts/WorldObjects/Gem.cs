@@ -19,8 +19,6 @@ public class Gem : GemAnimator, ICollectable {
 
         sendGemToTemple();
 
-
-
         foreach(IObserver obs in observers)
         {
             obs.Notify("");

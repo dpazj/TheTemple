@@ -29,8 +29,9 @@ public class GameManager : MonoBehaviour, IObserver {
     public float sensitivity = 2f;
     public bool postProcessing = true;
 
+    //Singleton design pattern
     public static GameManager instance = null;
-    private void Awake() //Singleton
+    private void Awake() 
     {
         if(instance == null)
         {

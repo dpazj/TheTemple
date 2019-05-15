@@ -95,7 +95,7 @@ public class PlayerController : MonoBehaviour {
                 }
                 else if (!run && Mathf.Abs(forwardVelocity) > movementInfo.walkSpeed)
                 {
-                    forwardVelocity = forwardVelocity - 0.25f;
+                    forwardVelocity -= 0.25f;
                     if (forwardVelocity < movementInfo.walkSpeed)
                     {
                         forwardVelocity = movementInfo.walkSpeed;
@@ -128,8 +128,6 @@ public class PlayerController : MonoBehaviour {
             //smooths transition from moving forwards to backwards and vice versa
             if (forwardMultiplier == -1 && forwardVelocity > 0) { forwardVelocity = -0.5f; }
             if (forwardMultiplier == 1 && forwardVelocity < 0) { forwardVelocity = 0.5f; }
-
-
 
             movementInfo.forwardVelocity = forwardVelocity;
             movementInfo.straffeVelocity = straffeVelocity;

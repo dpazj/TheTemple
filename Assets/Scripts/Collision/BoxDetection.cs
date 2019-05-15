@@ -52,7 +52,7 @@ public class BoxDetection : MonoBehaviour {
         float dotv = Vector3.Dot(x, v);
         float dotw = Vector3.Dot(x, w);
 
-        
+        //Is point inside the box
         if (dotu > 0 && dotu < Vector3.Dot(u,u) && dotv > 0 && dotv < Vector3.Dot(v, v) && dotw > 0 && dotw < Vector3.Dot(w, w))
         {
             Debug.Log("Collision");
